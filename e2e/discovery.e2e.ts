@@ -29,7 +29,7 @@ test.describe("KhanHomes Discovery independent preview",()=>{
  test("property detail does not simulate bookings or payment collection",async({page})=>{
   await page.goto("/homes/jade-residences-kilimani");
   await expect(page.getByRole("heading",{level:1})).toContainText("Jade Residences");
-  await expect(page.getByText(/fictional home/i)).toBeVisible();
+  await expect(page.locator(".status-explainer").getByText(/This fictional home/i)).toBeVisible();
   await expect(page.getByRole("button",{name:/Viewing requests not yet enabled/i})).toBeDisabled();
   await expect(page.getByText(/does not collect deposits/i)).toBeVisible();
  });
