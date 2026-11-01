@@ -97,6 +97,11 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
      <span className="section-side-note"><MapPin size={17}/> Kenya-first discovery</span>
     </div>
     <div className="catalog-frame">
+      <div className="discover-journey-bar" aria-label="Personal house-hunting tools">
+       <Link href="/match"><span className="journey-icon"><Sparkles size={20}/></span><span><strong>AURA Match Studio</strong><small>Find your best-fit homes</small></span><ArrowRight size={16}/></Link>
+       <Link href="/watch"><span className="journey-icon"><Heart size={20}/></span><span><strong>Saved Search Watch</strong><small>Check for newly appearing homes</small></span><ArrowRight size={16}/></Link>
+       <Link href="/visits"><span className="journey-icon"><Compass size={20}/></span><span><strong>Plan your visits</strong><small>Private, tentative calendar</small></span><ArrowRight size={16}/></Link>
+      </div>
       <DiscoverTools filters={filters} onFiltersChange={setFilters} counties={counties}/>
       <div className="catalog-toolbar">
        <div className="listing-tabs" role="group" aria-label="Purchase preference">
