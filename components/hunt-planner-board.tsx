@@ -1,10 +1,11 @@
 "use client";
-import {useEffect,useMemo,useState} from "react";
+import {useEffect,useMemo,useRef,useState} from "react";
 import Link from "next/link";
-import {ArrowRight,BadgeCheck,CalendarDays,Check,CheckSquare2,Download,Heart,Info,NotebookPen,Printer,ShieldCheck,Star,Trash2} from "lucide-react";
+import {ArrowRight,BadgeCheck,CalendarDays,Check,CheckSquare2,Download,Upload,Heart,Info,NotebookPen,Printer,ShieldCheck,Star,Trash2} from "lucide-react";
 import {type Listing,formatKes} from "@/lib/catalog";
 import {assessmentCompletion,exportSafePlanner,HUNT_CHECKLIST,HUNT_PLANNER_KEY,initialAssessment,safeAssessments,type CheckId,type HomeAssessment} from "@/lib/hunt-planner";
 import {PropertyPhoto} from "@/components/property-card";
+import {mergePlannerImport,parsePlannerImport} from "@/lib/planner-portability";
 const FAV_KEY="kh-discovery-saved-v1";
 function storedIds(raw:string|null):string[]{
  try{const x=JSON.parse(raw??"[]") as unknown;return Array.isArray(x)?x.filter((y):y is string=>typeof y==="string").slice(0,100):[];}catch{return [];}
@@ -15,6 +16,7 @@ export function HuntPlannerBoard({listings,mode}:{listings:Listing[];mode:"previ
  const [assessments,setAssessments]=useState<HomeAssessment[]>([]);
  const [selected,setSelected]=useState("");
  const [status,setStatus]=useState("");
+ const importInput=useRef<HTMLInputElement>(null);
  useEffect(()=>{
   try{
    setSaved(storedIds(localStorage.getItem(FAV_KEY)));
@@ -48,6 +50,18 @@ export function HuntPlannerBoard({listings,mode}:{listings:Listing[];mode:"previ
   anchor.href=url;anchor.download="khanhomes-discover-home-hunt-notes.json";anchor.click();
   URL.revokeObjectURL(url);
   setStatus("Your local notes were exported. Keep the file in a private location.");
+ };
+ const importNotes=async(file:File|undefined)=>{
+  if(!file)return;
+  if(file.size>100_000){setStatus("This file exceeds the 100 KB notebook import limit.");return;}
+  try{
+   const text=await file.text();
+   const imported=parsePlannerImport(text,listings.map(x=>x.id));
+   const merged=mergePlannerImport(assessments,imported);
+   save(merged);
+   setStatus("Imported "+imported.length+" matching home "+(imported.length===1?"assessment":"assessments")+". Newer notes were preserved. Saved homes remain unchanged.");
+  }catch(error){setStatus(error instanceof Error?error.message:"Could not import this notebook.");}
+  finally{if(importInput.current)importInput.current.value="";}
  };
  const clearCurrent=()=>{
   if(!active)return;
@@ -101,6 +115,8 @@ export function HuntPlannerBoard({listings,mode}:{listings:Listing[];mode:"previ
       </section>
       <div className="planner-actions">
        <button type="button" onClick={exportNotes}><Download size={16}/> Export notes</button>
+       <input ref={importInput} type="file" accept=".json,application/json" className="sr-only" aria-label="Import a KhanHomes Discover notebook" onChange={e=>void importNotes(e.target.files?.[0])}/>
+       <button type="button" onClick={()=>importInput.current?.click()}><Upload size={16}/> Import notes</button>
        <button type="button" onClick={()=>window.print()}><Printer size={16}/> Print summary</button>
        <button type="button" className="planner-delete" onClick={clearCurrent}><Trash2 size={16}/> Clear this home&apos;s notes</button>
       </div>
