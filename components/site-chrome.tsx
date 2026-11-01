@@ -39,6 +39,7 @@ export function SiteHeader(){
    <nav className="desktop-nav" aria-label="Primary">
     <Link href="/#homes">Explore homes</Link>
     <Link href="/#how-it-works">How it works</Link>
+    <Link href="/planner">My home planner</Link>
     <Link href="/account"><UserRound size={15}/> My account</Link>
     <a href={parentUrl} target="_blank" rel="noopener noreferrer">KhanHomes OS <ArrowUpRight size={14}/></a>
    </nav>

@@ -4,6 +4,10 @@
 
 KhanHomes Discover runs in its own repository, deployment and data boundary. It shares the architectural brand emblem, AURA styling, responsive spacing and Daybreak / Aurora / Midnight atmosphere vocabulary with [KhanHomes](https://khanhomes.vercel.app).
 
+## Build milestone: v0.4 browser-local home-hunt planning
+
+A private, browser-local planning workspace is available at `/planner` with saved favorite homes, custom notes, a 10-item viewing checklist, personal ratings, optional local visit dates, JSON export and print styling. These are subjective planning aids—not real appointments, certified inspections or financial applications. All notes stay on the current device; do not enter IDs, passwords or sensitive access details.
+
 ## Build milestone: v0.3 private seeker foundations
 
 This release adds **source-gated** separate Discover account, enquiry/viewing-request, cancellation and private fraud-report flows. No authenticated customer requests will be enabled until an independent Supabase project, email-verification/SMTP, appropriate moderation operations and cross-account acceptance are ready. A preview UI is **not** a live booking system. Study `docs/PRIVATE_JOURNEY.md`.

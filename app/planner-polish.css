@@ -1,0 +1,100 @@
+/* KhanHomes Discover v0.4 — private, local-only home-hunt planning */
+.planner-page{padding-block:clamp(22px,2.8vw,37px) clamp(42px,5vw,73px)}
+.planner-back{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:850;color:var(--kh-strong);min-height:40px;margin-bottom:21px}
+.planner-wrap{min-width:0}
+.planner-heading{display:grid;gap:9px;margin-bottom:17px}
+.planner-heading h2{font-size:clamp(31px,3.9vw,50px);line-height:1.15;margin:0}
+.planner-heading h2 em{color:var(--kh-strong)}
+.planner-heading>p{color:var(--kh-muted);font-size:13px;line-height:1.7;max-width:85ch;margin:0}
+.planner-privacy-banner{display:flex;align-items:flex-start;gap:10px;padding:13px 15px;border-radius:13px;background:var(--kh-soft);border:1px solid var(--kh-line);color:var(--kh-muted-strong);font-size:11px;line-height:1.65;margin:20px 0}
+.planner-privacy-banner svg{color:var(--kh-strong);flex-shrink:0}
+.planner-layout{display:grid;grid-template-columns:minmax(228px,.43fr) minmax(0,1fr);gap:clamp(15px,2.5vw,30px);align-items:start}
+.planner-sidebar{display:grid;gap:9px;padding:var(--discover-panel);background:var(--kh-paper);border-radius:19px;border:1px solid var(--kh-line)}
+.planner-sidebar-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:7px}
+.planner-sidebar-head strong{font-size:12px}
+.planner-sidebar-head a{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:850;color:var(--kh-strong)}
+.planner-home-tab{display:flex;gap:11px;align-items:center;padding:9px;width:100%;text-align:left;border:1px solid var(--kh-line);background:var(--kh-paper);border-radius:12px;color:var(--kh-ink);min-width:0}
+.planner-home-tab.selected,.planner-home-tab:hover{background:var(--kh-soft);border-color:var(--kh-strong)}
+.planner-home-tab .property-photo{flex:0 0 69px;width:69px;height:64px;border-radius:9px}
+.planner-home-tab>span{display:grid;gap:5px;min-width:0}
+.planner-home-tab strong{font-size:12px;white-space:normal;overflow-wrap:anywhere}
+.planner-home-tab small{font-size:10px;line-height:1.4;color:var(--kh-muted)}
+.planner-detail{min-width:0;border:1px solid var(--kh-line);border-radius:20px;padding:clamp(16px,2.2vw,28px);background:var(--kh-paper);box-shadow:var(--kh-shadow)}
+.planner-detail-heading{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.planner-detail-heading h3{font-size:clamp(23px,2.3vw,32px);margin:6px 0}
+.planner-detail-heading p{color:var(--kh-muted);font-size:12px;line-height:1.6;margin:0}
+.planner-detail-heading>a{display:inline-flex;align-items:center;gap:7px;padding:10px 12px;background:var(--kh-soft);border:1px solid var(--kh-line);border-radius:10px;color:var(--kh-strong);font-size:11px;font-weight:850;min-height:41px;white-space:nowrap}
+.planner-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}
+.planner-overview>div{min-width:0;display:grid;gap:5px;padding:13px;background:var(--kh-soft);border:1px solid var(--kh-line);border-radius:11px}
+.planner-overview span{color:var(--kh-strong)}
+.planner-overview strong{font-size:15px;overflow-wrap:anywhere}
+.planner-overview small{font-size:10px;color:var(--kh-muted)}
+.planner-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:15px;padding-block:16px;border-block:1px solid var(--kh-line)}
+.planner-controls>label,.planner-rating{display:grid;gap:8px;min-width:0}
+.planner-controls label>span,.planner-rating>span{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:850;color:var(--kh-muted-strong)}
+.planner-controls label>span svg{color:var(--kh-strong)}
+.planner-controls input[type=date]{min-height:42px;min-width:0;width:100%;background:var(--kh-soft);color:var(--kh-ink);border:1px solid var(--kh-line);border-radius:10px;padding:9px 12px;font-size:12px}
+.planner-rating>div{display:flex;align-items:center;gap:2px;min-height:42px}
+.planner-rating button{display:grid;place-items:center;min-height:39px;min-width:39px;border:0;background:transparent;color:var(--kh-muted);border-radius:8px}
+.planner-rating button[aria-pressed=true],.planner-rating button:has(svg[fill="currentColor"]){color:#c48b33;background:var(--kh-soft)}
+.planner-checks{margin-top:25px}
+.planner-checks>div:first-child{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:13px}
+.planner-checks h4{font-size:17px;margin:0;letter-spacing:-.035em}
+.planner-checks>div:first-child span{font-size:11px;font-weight:800;color:var(--kh-muted)}
+.planner-check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.planner-check-grid label{display:flex;align-items:flex-start;gap:9px;min-width:0;padding:13px;border:1px solid var(--kh-line);background:var(--kh-paper);border-radius:11px;cursor:pointer}
+.planner-check-grid label.checked{background:var(--kh-soft);border-color:color-mix(in srgb,var(--kh-strong) 42%,var(--kh-line))}
+.planner-check-grid input{flex:0 0 17px;width:17px;height:17px;accent-color:var(--kh-strong);margin-top:1px}
+.planner-check-grid label>span{flex:1;display:grid;gap:6px;min-width:0}
+.planner-check-grid strong{font-size:11px;line-height:1.45}
+.planner-check-grid small{font-size:10px;line-height:1.6;color:var(--kh-muted)}
+.planner-check-grid label>svg{color:var(--kh-strong)}
+.planner-notes{display:grid;gap:10px;margin-top:24px}
+.planner-notes label{display:flex;align-items:center;gap:8px;font-weight:850;font-size:14px}
+.planner-notes label svg{color:var(--kh-strong)}
+.planner-notes textarea{resize:vertical;min-height:95px;width:100%;padding:12px;line-height:1.6;border:1px solid var(--kh-line);border-radius:11px;color:var(--kh-ink);background:var(--kh-soft);font-size:12px}
+.planner-notes>small{font-size:10px;color:var(--kh-muted);text-align:right}
+.planner-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.planner-actions button{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:10px 12px;border:1px solid var(--kh-line);border-radius:10px;background:var(--kh-soft);color:var(--kh-strong);font-size:11px;font-weight:850}
+.planner-actions .planner-delete{color:#ae4d4d}
+.planner-status{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--kh-muted);margin:14px 0 0}
+.planner-status svg{color:var(--kh-strong)}
+.planner-footer-note{display:flex;align-items:start;gap:8px;font-size:11px;line-height:1.7;color:var(--kh-muted);margin:20px 0 0}
+.planner-footer-note svg{color:var(--kh-strong);flex-shrink:0}
+.planner-empty{display:grid;justify-items:center;text-align:center;gap:10px;padding:clamp(30px,5vw,65px);background:var(--kh-paper);border:1px dashed var(--kh-line);border-radius:20px}
+.planner-empty>span{width:60px;height:60px;display:grid;place-items:center;border-radius:17px;background:var(--kh-soft);color:var(--kh-strong)}
+.planner-empty h3{font-size:23px;line-height:1.3;margin:5px 0}
+.planner-empty p{font-size:13px;max-width:50ch;line-height:1.7;color:var(--kh-muted)}
+.planner-empty a{display:inline-flex;align-items:center;gap:7px;background:var(--kh-deep);color:#fff;border-radius:11px;padding:13px 16px;font-size:12px;font-weight:850}
+.planner-loading{color:var(--kh-muted);font-size:13px}
+@media(max-width:900px){
+ .planner-layout{grid-template-columns:minmax(0,1fr)}
+ .planner-sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .planner-sidebar-head{grid-column:1/-1}
+}
+@media(max-width:600px){
+ .planner-page{padding-top:18px}
+ .planner-heading h2{font-size:clamp(30px,7.5vw,40px)}
+ .planner-sidebar{grid-template-columns:minmax(0,1fr)}
+ .planner-overview{gap:7px}
+ .planner-overview>div{padding:10px}
+ .planner-overview strong{font-size:13px}
+ .planner-overview small{font-size:9px}
+ .planner-controls{grid-template-columns:minmax(0,1fr)}
+ .planner-check-grid{grid-template-columns:minmax(0,1fr)}
+ .planner-detail{padding:15px}
+ .planner-home-tab .property-photo{flex-basis:58px;width:58px;height:55px}
+ .planner-heading>p{font-size:12px}
+}
+@media(max-width:380px){
+ .planner-overview{grid-template-columns:minmax(0,1fr)}
+ .planner-overview>div{grid-template-columns:27px minmax(0,1fr);align-items:center;column-gap:10px}
+ .planner-overview>div>small{grid-column:2}
+}
+@media print{
+ .site-header,.site-footer,.planner-sidebar,.planner-actions,.planner-back,.planner-privacy-banner{display:none!important}
+ .planner-layout{display:block}
+ .planner-page{padding:0;max-width:100%}
+ .planner-detail{border:0;box-shadow:none}
+ .planner-check-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
