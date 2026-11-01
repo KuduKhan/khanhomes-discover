@@ -119,7 +119,7 @@ test.describe("KhanHomes Discover independent preview",()=>{
   await page.getByRole("checkbox",{name:/Water supply and pressure/}).check();
   await page.getByRole("button",{name:"Rate 4 out of 5"}).click();
   await page.getByRole("textbox",{name:"Your private observations"}).fill("Check water pressure in the kitchen. This is a fictional test note.");
-  await expect(page.getByText("10%")).toBeVisible();
+  await expect(page.locator(".planner-overview").getByText("10%",{exact:true})).toBeVisible();
   await page.reload();
   await expect(page.getByRole("checkbox",{name:/Water supply and pressure/})).toBeChecked();
   await expect(page.getByRole("textbox",{name:"Your private observations"})).toHaveValue(/fictional test note/);
