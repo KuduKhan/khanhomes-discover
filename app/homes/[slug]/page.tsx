@@ -9,6 +9,9 @@ import {SiteHeader,SiteFooter} from "@/components/site-chrome";
 import {SaveHomeButton} from "@/components/save-home-button";
 import {MoveInEstimator} from "@/components/move-in-estimator";
 import {ListingTrust} from "@/components/listing-trust";
+import {RequestViewing} from "@/components/request-viewing";
+import {ListingReport} from "@/components/listing-report";
+import {ApplicationPath} from "@/components/application-path";
 export const dynamic="force-dynamic";
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
  const {slug}=await params;
@@ -49,13 +52,17 @@ export default async function PropertyPage({params}:{params:Promise<{slug:string
     <section className="detail-section status-explainer"><ShieldCheck size={23}/><div><h3>Designed for clarity.</h3><p>{home.source==="demo"?"This fictional home is a UI demonstration. No enquiry, viewing, booking or payment is available.": "Information is a publisher-supplied public snapshot. Confirm current availability and terms independently; an online publication alone is not proof of title, representation or occupancy."}</p></div></section>
     {home.type==="rent"&&<MoveInEstimator monthlyRent={home.priceKes}/>}
     <ListingTrust listing={home}/>
+    <ListingReport listing={home}/>
+    <ApplicationPath/>
    </div>
    <aside className="detail-aside" aria-label="Listing price and status">
     <span className="detail-aside-label">{home.type==="rent"?"MONTHLY RENT":"ASKING PRICE"} · {home.source==="demo"?"FICTIONAL":"PUBLISHED"}</span>
     <div className="detail-price">{formatKes(home.priceKes)}{home.type==="rent"&&<span> / month</span>}</div>
     <div className="detail-trust"><Check size={16}/>{statusText(home.status)}</div>
     <p className="detail-aside-notice">{home.source==="demo"?"Preview only. Real viewings and applications are not enabled.":"Booking a viewing requires an approved, verified manager workflow. Not available through this page yet."}</p>
-    <button type="button" className="detail-book-disabled" disabled><Clock3 size={18}/> Viewing requests not yet enabled</button>
+    {home.source==="demo"||process.env.NEXT_PUBLIC_DISCOVER_REQUESTS_ENABLED!=="true"?
+      <button type="button" className="detail-book-disabled" disabled><Clock3 size={18}/> Viewing requests not yet enabled</button>:
+      <RequestViewing home={home}/>}
     <Link className="detail-back" href="/#homes">Continue exploring homes <ArrowRight size={16}/></Link>
     <div className="detail-fee-note"><ShieldCheck size={17}/> KhanHomes Discover does not collect deposits or booking fees.</div>
    </aside>

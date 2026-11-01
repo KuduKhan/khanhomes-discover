@@ -93,3 +93,14 @@ Tenant/resident names, personal emails/phones, bank details, lease documents, pa
 ## Release status
 
 The standalone app can ship with fictional public sample homes. Live publishing stays **off** until separate Supabase and publisher authorization are configured and tested. Public search does not imply the presence of any real home.
+
+## v0.3 Private seeker requests (off by default)
+
+KhanHomes Discover uses **its own Supabase Auth instance** and a separate private seeker database. The private workflow requires the v0.3 RLS migration and deliberate enablement of all feature flags after signed-in validation.
+
+- Discovery Auth users cannot read KhanHomes operational organization membership, tenant leases, bank transactions or private documents.
+- A viewing request is an **unconfirmed request**. Only authorized property representatives may accept, reject or confirm it in a separately authenticated coordination workspace (not implemented).
+- Server-side Bearer tokens are checked by Supabase Auth `getUser(token)`; email confirmation is mandatory. Untrusted user metadata never grants operator privileges.
+- Requests are admitted by service-role-only transactional RPCs with listing freshness/availability checks, per-user quotas and a private RLS table.
+- Listings reports are never publicly readable and require a verified seeker.
+- Until operations work queues, authorization, email verification, privacy retention and tested production infrastructure exist, keep private flags false.
