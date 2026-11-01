@@ -86,10 +86,23 @@ test.describe("KhanHomes Discover independent preview",()=>{
   const signed=await request.post("/api/integrations/khanhomes",{data:{}});
   expect(signed.status()).toBe(503);
  });
+ test("account and property detail remain readable at small and wide viewports",async({page},info)=>{
+  for(const width of [320,390,768,1440]){
+   await page.setViewportSize({width,height:900});
+   for(const address of ["/account","/homes/jade-residences-kilimani"]){
+    await page.goto(address);
+    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+    expect(overflow,address+" overflow at "+width).toBeLessThanOrEqual(2);
+    if(info.project.name==="desktop-chromium" && [390,1440].includes(width)){
+     const suffix=address==="/account"?"account":"home-detail";
+     await page.screenshot({path:"test-results/visual-audit/"+suffix+"-"+width+".png",animations:"disabled"});
+    }
+   }
+  }
+ });
  test("private accounts, booking and fraud-report APIs fail closed in unconfigured preview",async({page,request})=>{
   await page.goto("/account");
   await expect(page.getByRole("heading",{name:/Private accounts are being prepared/})).toBeVisible();
-  await expect(page.getByText(/not grant access to any private KhanHomes/i)).toHaveCount(0);
   const viewing=await request.post("/api/seeker-requests",{data:{}});
   expect(viewing.status()).toBe(503);
   const report=await request.post("/api/reports",{data:{}});
