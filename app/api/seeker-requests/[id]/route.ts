@@ -1,5 +1,6 @@
 import {NextRequest,NextResponse} from "next/server";
-import {authenticatedSeeker,privateRequestsEnabled,validSameOrigin} from "@/lib/seeker-request";
+import {validSameOrigin} from "@/lib/seeker-request";
+import {authenticatedSeeker,privateRequestsEnabled} from "@/lib/server-seeker-auth";
 import {discoveryClient} from "@/lib/public-catalog";
 export const runtime="nodejs";
 export const dynamic="force-dynamic";

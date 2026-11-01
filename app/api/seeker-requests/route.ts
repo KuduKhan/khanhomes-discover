@@ -1,6 +1,7 @@
 import {NextRequest,NextResponse} from "next/server";
 import {discoveryClient} from "@/lib/public-catalog";
-import {authenticatedSeeker,privateRequestsEnabled,requestDateIsValid,seekerRequestSchema,validSameOrigin} from "@/lib/seeker-request";
+import {requestDateIsValid,seekerRequestSchema,validSameOrigin} from "@/lib/seeker-request";
+import {authenticatedSeeker,privateRequestsEnabled} from "@/lib/server-seeker-auth";
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
 const headers={"Cache-Control":"no-store","X-Content-Type-Options":"nosniff"};
