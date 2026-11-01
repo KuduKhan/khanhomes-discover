@@ -86,6 +86,17 @@ test.describe("KhanHomes Discover independent preview",()=>{
   const signed=await request.post("/api/integrations/khanhomes",{data:{}});
   expect(signed.status()).toBe(503);
  });
+ test("private accounts, booking and fraud-report APIs fail closed in unconfigured preview",async({page,request})=>{
+  await page.goto("/account");
+  await expect(page.getByRole("heading",{name:/Private accounts are being prepared/})).toBeVisible();
+  await expect(page.getByText(/not grant access to any private KhanHomes/i)).toHaveCount(0);
+  const viewing=await request.post("/api/seeker-requests",{data:{}});
+  expect(viewing.status()).toBe(503);
+  const report=await request.post("/api/reports",{data:{}});
+  expect(report.status()).toBe(503);
+  const history=await request.get("/api/seeker-requests");
+  expect(history.status()).toBe(503);
+ });
  test("atmosphere and dark mode change visual tokens with no authorization impact",async({page})=>{
   await page.goto("/");
   await page.getByRole("button",{name:"Apply Daybreak atmosphere"}).click();
