@@ -1,8 +1,8 @@
-# KhanHomes Discovery
+# KhanHomes Discover
 
 **Independent house-hunting experience, connected to KhanHomes.**
 
-KhanHomes Discovery runs in its own repository, deployment and data boundary. It shares the architectural brand emblem, AURA styling, responsive spacing and Daybreak / Aurora / Midnight atmosphere vocabulary with [KhanHomes](https://khanhomes.vercel.app).
+KhanHomes Discover runs in its own repository, deployment and data boundary. It shares the architectural brand emblem, AURA styling, responsive spacing and Daybreak / Aurora / Midnight atmosphere vocabulary with [KhanHomes](https://khanhomes.vercel.app).
 
 ## MVP capabilities
 

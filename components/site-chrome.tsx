@@ -71,9 +71,9 @@ export function SiteFooter({mode}:{mode:"preview"|"live"}){
     <p>Find your place. Feel at home. A refined house-hunting experience connected to KhanHomes.</p>
     <span className="footer-trust">{mode==="preview"?"Preview catalog · Fictional homes and indicative prices":"Published listing catalog · Check details before decisions"}</span>
    </div>
-   <nav aria-label="Discovery links" className="footer-links"><strong>Explore</strong><Link href="/#homes">Search homes</Link><Link href="/#how-it-works">The journey</Link><Link href="/#connection">Connected living</Link></nav>
+   <nav aria-label="Discover links" className="footer-links"><strong>Explore</strong><Link href="/#homes">Search homes</Link><Link href="/#how-it-works">The journey</Link><Link href="/#connection">Connected living</Link></nav>
    <nav aria-label="KhanHomes links" className="footer-links"><strong>Connected to</strong><a target="_blank" rel="noopener noreferrer" href={parentUrl}>KhanHomes OS <ArrowUpRight size={14}/></a><Link href="/api/health">System status</Link><a href="https://github.com/KuduKhan/khanhomes-discovery" target="_blank" rel="noopener noreferrer">Project source <ArrowUpRight size={14}/></a></nav>
   </div>
-  <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} KhanHomes Discovery</span><span>An independent KhanHomes experience · No payment collection or unapproved listings</span></div>
+  <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} KhanHomes Discover</span><span>An independent KhanHomes experience · No payment collection or unapproved listings</span></div>
  </footer>;
 }

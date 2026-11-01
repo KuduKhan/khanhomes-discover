@@ -7,6 +7,8 @@ import {formatKes,statusText} from "@/lib/catalog";
 import {PropertyPhoto} from "@/components/property-card";
 import {SiteHeader,SiteFooter} from "@/components/site-chrome";
 import {SaveHomeButton} from "@/components/save-home-button";
+import {MoveInEstimator} from "@/components/move-in-estimator";
+import {ListingTrust} from "@/components/listing-trust";
 export const dynamic="force-dynamic";
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
  const {slug}=await params;
@@ -45,6 +47,8 @@ export default async function PropertyPage({params}:{params:Promise<{slug:string
     <section className="detail-section"><span className="section-kicker">GET TO KNOW THE SPACE</span><h2>A little more about this home.</h2><p>{home.description}</p></section>
     <section className="detail-section"><span className="section-kicker">THE LITTLE EXTRAS</span><h2>Features & amenities.</h2><div className="amenity-grid">{home.amenities.map(a=><span key={a}><CheckCircle2 size={18}/>{a}</span>)}<span><CheckCircle2 size={18}/>{home.furnished?"Furnished":"Unfurnished"}</span></div></section>
     <section className="detail-section status-explainer"><ShieldCheck size={23}/><div><h3>Designed for clarity.</h3><p>{home.source==="demo"?"This fictional home is a UI demonstration. No enquiry, viewing, booking or payment is available.": "Information is a publisher-supplied public snapshot. Confirm current availability and terms independently; an online publication alone is not proof of title, representation or occupancy."}</p></div></section>
+    {home.type==="rent"&&<MoveInEstimator monthlyRent={home.priceKes}/>}
+    <ListingTrust listing={home}/>
    </div>
    <aside className="detail-aside" aria-label="Listing price and status">
     <span className="detail-aside-label">{home.type==="rent"?"MONTHLY RENT":"ASKING PRICE"} · {home.source==="demo"?"FICTIONAL":"PUBLISHED"}</span>
@@ -53,7 +57,7 @@ export default async function PropertyPage({params}:{params:Promise<{slug:string
     <p className="detail-aside-notice">{home.source==="demo"?"Preview only. Real viewings and applications are not enabled.":"Booking a viewing requires an approved, verified manager workflow. Not available through this page yet."}</p>
     <button type="button" className="detail-book-disabled" disabled><Clock3 size={18}/> Viewing requests not yet enabled</button>
     <Link className="detail-back" href="/#homes">Continue exploring homes <ArrowRight size={16}/></Link>
-    <div className="detail-fee-note"><ShieldCheck size={17}/> KhanHomes Discovery does not collect deposits or booking fees.</div>
+    <div className="detail-fee-note"><ShieldCheck size={17}/> KhanHomes Discover does not collect deposits or booking fees.</div>
    </aside>
   </div>
   <section className="detail-outro"><div><Heart size={23}/><h2>The right place is worth finding.</h2><p>Explore more possibilities with a calmer, clearer view of what matters.</p></div><Link href="/#homes">See more homes <ArrowUpRight size={17}/></Link></section>

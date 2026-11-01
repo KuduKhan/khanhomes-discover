@@ -1,5 +1,5 @@
 import {expect,test} from "@playwright/test";
-test.describe("KhanHomes Discovery independent preview",()=>{
+test.describe("KhanHomes Discover independent preview",()=>{
  test("accessible catalogue, rent/sale filtering, saved homes and comparison",async({page})=>{
   await page.goto("/");
   await expect(page.getByRole("heading",{level:1})).toContainText("Find a place");
@@ -45,6 +45,36 @@ test.describe("KhanHomes Discovery independent preview",()=>{
    }
   }
  });
+
+ test("explainable home search, saved filters and area atlas work in preview",async({page})=>{
+  await page.goto("/");
+  await page.getByRole("textbox",{name:"Describe a property search"}).fill("Find 2 bedrooms in Mombasa under KES 50k with parking");
+  await page.getByRole("button",{name:"Find matches"}).click();
+  await expect(page.locator(".property-card")).toHaveCount(1);
+  await expect(page.getByText("Up to KES 50,000")).toBeVisible();
+  await page.getByRole("button",{name:"Save search",exact:true}).click();
+  await page.getByRole("textbox",{name:"Name this search"}).fill("Coastal family homes");
+  await page.getByRole("button",{name:"Save locally"}).click();
+  await expect(page.getByRole("button",{name:/Saved searches \(1\)/})).toBeVisible();
+  await page.reload();
+  await page.getByRole("button",{name:/Saved searches \(1\)/}).click();
+  await expect(page.getByText("Coastal family homes")).toBeVisible();
+  await page.locator(".saved-search-entry").getByRole("button",{name:"Apply"}).click();
+  await expect(page.locator(".property-card")).toHaveCount(1);
+  await page.getByRole("button",{name:"Area map view"}).click();
+  await expect(page.getByRole("region",{name:"Interactive Kenya area overview"})).toBeVisible();
+  await expect(page.getByText(/not exact home addresses/)).toBeVisible();
+ });
+ test("cost estimator itemizes assumptions without claiming actual charges",async({page})=>{
+  await page.goto("/homes/jade-residences-kilimani");
+  const estimate=page.getByRole("region",{name:"Move-in cost estimator"});
+  await expect(estimate).toBeVisible();
+  await expect(estimate.getByText("KES 136,000")).toBeVisible();
+  await estimate.getByRole("combobox",{name:"Deposit months"}).selectOption("2");
+  await expect(estimate.getByText("KES 204,000")).toBeVisible();
+  await expect(estimate.getByText(/not verified listing charges/)).toBeVisible();
+ });
+
  test("public API never misrepresents sample listings as live",async({request})=>{
   const res=await request.get("/api/listings");
   expect(res.ok()).toBe(true);
