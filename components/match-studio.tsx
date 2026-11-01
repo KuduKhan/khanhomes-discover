@@ -2,7 +2,7 @@
 import {useEffect,useMemo,useState} from "react";
 import Link from "next/link";
 import {
- ArrowRight,ArrowUpRight,BadgeCheck,Check,Compass,Heart,MapPin,SlidersHorizontal,
+ ArrowRight,ArrowUpRight,BadgeCheck,Check,Compass,MapPin,SlidersHorizontal,
  Sparkles,ShieldCheck,Target,Wallet,Layers3,Flower2,RotateCcw,Info
 } from "lucide-react";
 import {formatKes,type Listing} from "@/lib/catalog";

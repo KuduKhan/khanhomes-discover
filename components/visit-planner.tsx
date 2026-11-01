@@ -1,7 +1,7 @@
 "use client";
 import {useEffect,useMemo,useState} from "react";
 import Link from "next/link";
-import {ArrowRight,CalendarClock,CalendarPlus,Check,Clock3,Download,Info,MapPin,Plus,ShieldCheck,Trash2} from "lucide-react";
+import {ArrowRight,CalendarClock,CalendarPlus,Check,Download,Info,MapPin,Plus,ShieldCheck,Trash2} from "lucide-react";
 import {type Listing,formatKes} from "@/lib/catalog";
 import {TENTATIVE_VISITS_KEY,buildTentativeIcs,hasVisitClash,normalizeTentativeVisits,type TentativeVisit} from "@/lib/calendar-export";
 type Props={listings:Listing[];mode:"preview"|"live"};
