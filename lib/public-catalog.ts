@@ -1,6 +1,7 @@
-/** Server-side only. Discovery never queries KhanHomes' private operational tables. */
+/** Server-side only. Discover never queries KhanHomes' private operational tables. */
 import { createClient } from "@supabase/supabase-js";
 import { PREVIEW_LISTINGS,type Listing,type PropertyKind,type ListingStatus,type ListingType } from "@/lib/catalog";
+import {normalizeListingFreshness} from "./listing-freshness";
 
 export type CatalogResponse={mode:"preview"|"live";listings:Listing[]};
 export function discoveryBackendConfigured(): boolean {
@@ -10,7 +11,7 @@ export function discoveryClient() {
  const url=process.env.DISCOVERY_SUPABASE_URL;
  const key=process.env.DISCOVERY_SUPABASE_SERVICE_ROLE_KEY;
  if(!url || !key)throw new Error("Discovery backend is not configured");
- return createClient(url,key,{auth:{autoRefreshToken:false,persistSession:false},global:{headers:{"X-Client-Info":"khanhomes-discovery/0.1"}}});
+ return createClient(url,key,{auth:{autoRefreshToken:false,persistSession:false},global:{headers:{"X-Client-Info":"khanhomes-discover/0.3"}}});
 }
 type Row = {
  id:string;slug:string;title:string;area:string;county:string;kind:string;listing_type:string;
@@ -18,6 +19,7 @@ type Row = {
  amenities:string[];description:string;images:string[];verification:string;availability:string;source_updated_at:string;
 };
 function publicRow(row:Row): Listing{
+ const verified=normalizeListingFreshness(row.verification as ListingStatus,row.availability as Listing["availability"],row.source_updated_at);
  return {
   id:row.id,slug:row.slug,title:row.title,area:row.area,county:row.county,
   kind:row.kind as PropertyKind,type:row.listing_type as ListingType,
@@ -25,7 +27,7 @@ function publicRow(row:Row): Listing{
   furnished:row.furnished,parking:row.parking,
   amenities:Array.isArray(row.amenities)?row.amenities:[],
   description:row.description,images:Array.isArray(row.images)?row.images:[],
-  status:row.verification as ListingStatus,availability:row.availability as Listing["availability"],
+  status:verified.status,availability:verified.availability,
   updatedAt:row.source_updated_at,source:"khanhomes"
  };
 }
