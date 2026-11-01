@@ -1,7 +1,7 @@
 "use client";
 import {useEffect,useMemo,useState} from "react";
 import Link from "next/link";
-import {ArrowRight,ArrowUpRight,BadgeCheck,Check,CheckCircle2,ClipboardCheck,CopyPlus,Download,
+import {ArrowUpRight,Check,CheckCircle2,ClipboardCheck,CopyPlus,Download,
  FileCheck2,FileText,Home,Info,LockKeyhole,Plus,Save,ShieldCheck,SlidersHorizontal,Trash2} from "lucide-react";
 import {formatKes} from "@/lib/catalog";
 import {blankListingDraft,DRAFT_AMENITIES,DRAFT_KINDS,evaluateDraft,exportLocalDraft,LISTING_DRAFT_KEY,
