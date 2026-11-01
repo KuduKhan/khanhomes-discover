@@ -77,7 +77,7 @@ export function MatchStudio({listings,mode}:Props){
     </div>
     <fieldset className="match-feature-fieldset"><legend>Lifestyle preferences</legend>
      <div className="match-feature-tags">
-      {[{id:"Parking",label:"Parking"},{id:"Furnished",label:"Furnished"},...amenities.filter(x=>x!=="Parking"&&x!=="Furnished").map(x=>({id:x,label:x}))].map(item=>{
+      {[{id:"Parking",label:"Parking"},{id:"Furnished",label:"Furnished"},...amenities.filter(x=>x!=="Parking").map(x=>({id:x,label:x}))].map(item=>{
        const checked=item.id==="Parking"?preferences.parking:item.id==="Furnished"?preferences.furnished:preferences.amenities.includes(item.id);
        return <label className={checked?"selected":""} key={item.id}>
         <input type="checkbox" checked={checked} onChange={e=>{
