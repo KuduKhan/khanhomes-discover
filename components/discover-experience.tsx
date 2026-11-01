@@ -4,10 +4,12 @@ import Link from "next/link";
 import {
  ArrowRight,ArrowUpRight,BadgeCheck,Building2,CheckCircle2,ChevronDown,Compass,
  GitCompareArrows,Heart,House,KeyRound,MapPin,Search,ShieldCheck,SlidersHorizontal,
- Sparkles,Users,X,Grid2X2,Rows3,MoveUpRight
+ Sparkles,Users,X,Grid2X2,Rows3,MoveUpRight,Map as MapIcon
 } from "lucide-react";
 import {type Listing,PREVIEW_NOTICE,formatKes} from "@/lib/catalog";
-import {DEFAULT_FILTERS,filterListings,uniqueCounties,type Filters,type SortOrder} from "@/lib/filters";
+import {DEFAULT_FILTERS,HOME_KINDS,POPULAR_AMENITIES,countActiveFilters,filterListings,uniqueCounties,type Filters,type SortOrder} from "@/lib/filters";
+import {DiscoverTools} from "@/components/discover-tools";
+import {AreaAtlas} from "@/components/area-atlas";
 import {PropertyCard,PropertyPhoto} from "@/components/property-card";
 import {SiteHeader,SiteFooter} from "@/components/site-chrome";
 
@@ -23,7 +25,8 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
  const [compared,setCompared]=useState<string[]>([]);
  const [compareVisible,setCompareVisible]=useState(false);
  const [filtersOpen,setFiltersOpen]=useState(false);
- const [view,setView]=useState<"grid"|"list">("grid");
+ const [view,setView]=useState<"grid"|"list"|"map">("grid");
+ const [compareWarning,setCompareWarning]=useState("");
  const resultsRef=useRef<HTMLElement>(null);
  useEffect(()=>{try{setSaved(safeStorage(localStorage.getItem("kh-discovery-saved-v1")));}catch{}},[]);
  const save=(id:string)=>{
@@ -34,10 +37,14 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
   });
  };
  const compare=(id:string)=>{
-  setCompared(old=>old.includes(id)?old.filter(x=>x!==id):old.length<3?[...old,id]:old);
+  setCompared(old=>{
+   if(old.includes(id)){setCompareWarning("");return old.filter(x=>x!==id);}
+   if(old.length>=3){setCompareWarning("Choose at most three homes. Remove one to compare another.");return old;}
+   setCompareWarning("");return [...old,id];
+  });
  };
  const choose=(key:keyof Filters,value:Filters[keyof Filters])=>setFilters(old=>({...old,[key]:value}));
- const clear=()=>{setFilters(DEFAULT_FILTERS);setSavedOnly(false)};
+ const clear=()=>{setFilters({...DEFAULT_FILTERS,amenities:[]});setSavedOnly(false)};
  const shown=useMemo(()=>{
   const data=filterListings(catalog.listings,filters);
   return savedOnly?data.filter(home=>saved.includes(home.id)):data;
@@ -90,6 +97,7 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
      <span className="section-side-note"><MapPin size={17}/> Kenya-first discovery</span>
     </div>
     <div className="catalog-frame">
+      <DiscoverTools filters={filters} onFiltersChange={setFilters} counties={counties}/>
       <div className="catalog-toolbar">
        <div className="listing-tabs" role="group" aria-label="Purchase preference">
         <button type="button" aria-pressed={filters.type==="rent"} onClick={()=>choose("type","rent")}>For rent</button>
@@ -98,7 +106,7 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
        </div>
        <div className="toolbar-actions">
         <button type="button" className={"saved-filter"+(savedOnly?" active":"")} onClick={()=>setSavedOnly(!savedOnly)} aria-pressed={savedOnly}><Heart size={17} fill={savedOnly?"currentColor":"none"}/> Saved <span>{saved.length}</span></button>
-        <button type="button" className="filter-trigger" onClick={()=>setFiltersOpen(!filtersOpen)} aria-expanded={filtersOpen} aria-controls="discovery-filters"><SlidersHorizontal size={17}/> Filters <ChevronDown size={15}/></button>
+        <button type="button" className="filter-trigger" onClick={()=>setFiltersOpen(!filtersOpen)} aria-expanded={filtersOpen} aria-controls="discovery-filters"><SlidersHorizontal size={17}/> Filters {countActiveFilters(filters)>0&&<span className="filter-count">{countActiveFilters(filters)}</span>} <ChevronDown size={15}/></button>
        </div>
       </div>
       <div id="discovery-filters" className={"filter-fields"+(filtersOpen?" is-open":"")} >
@@ -106,10 +114,14 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
        <label className="filter-field"><span>Maximum budget (KES)</span><select aria-label="Maximum budget" value={filters.maxPrice??0} onChange={e=>choose("maxPrice",Number(e.target.value)||null)}>
         <option value="0">Any budget</option>{(filters.type==="sale"?[10000000,20000000,50000000,100000000]:[25000,35000,50000,75000,100000,150000,250000]).map(p=><option key={p} value={p}>{formatKes(p)}</option>)}</select></label>
        <label className="filter-field"><span>Minimum bedrooms</span><select aria-label="Minimum bedrooms" value={filters.minBeds} onChange={e=>choose("minBeds",Number(e.target.value))}>{[0,1,2,3,4].map(n=><option key={n} value={n}>{n===0?"Any / studio":n+"+"}</option>)}</select></label>
+       <label className="filter-field"><span>Property type</span><select aria-label="Property type" value={filters.kind} onChange={e=>choose("kind",e.target.value as Filters["kind"])}><option value="all">All property types</option>{HOME_KINDS.map(kind=><option key={kind} value={kind}>{kind}</option>)}</select></label>
+       <label className="filter-field"><span>Minimum bathrooms</span><select aria-label="Minimum bathrooms" value={filters.minBaths} onChange={e=>choose("minBaths",Number(e.target.value))}>{[0,1,2,3,4].map(n=><option key={n} value={n}>{n===0?"Any bathrooms":n+"+"}</option>)}</select></label>
+       <label className="filter-field"><span>Minimum floor area</span><select aria-label="Minimum floor area" value={filters.minSqm} onChange={e=>choose("minSqm",Number(e.target.value))}>{[0,40,70,100,150,200].map(n=><option key={n} value={n}>{n===0?"Any floor area":n+"+ m²"}</option>)}</select></label>
        <div className="filter-checkboxes">
         <label><input type="checkbox" checked={filters.parking} onChange={e=>choose("parking",e.target.checked)}/> Parking</label>
         <label><input type="checkbox" checked={filters.furnished} onChange={e=>choose("furnished",e.target.checked)}/> Furnished</label>
        </div>
+       <div className="amenity-filter-group"><strong>Must-have amenities</strong><div>{POPULAR_AMENITIES.filter(x=>x!=="Parking").map(item=><label key={item}><input type="checkbox" checked={filters.amenities.includes(item)} onChange={e=>choose("amenities",e.target.checked?[...filters.amenities,item]:filters.amenities.filter(x=>x!==item))}/>{item}</label>)}</div></div>
        <button type="button" className="reset-filters" onClick={clear}>Reset filters <X size={14}/></button>
       </div>
       <div className="results-bar">
@@ -121,13 +133,15 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
         <div className="view-choice" role="group" aria-label="Display layout">
          <button type="button" aria-label="Grid layout" aria-pressed={view==="grid"} onClick={()=>setView("grid")}><Grid2X2 size={16}/></button>
          <button type="button" aria-label="List layout" aria-pressed={view==="list"} onClick={()=>setView("list")}><Rows3 size={17}/></button>
+         <button type="button" aria-label="Area map view" aria-pressed={view==="map"} onClick={()=>setView("map")}><MapIcon size={16}/></button>
         </div>
        </div>
       </div>
-      {shown.length>0?<div className={"property-grid "+(view==="list"?"property-list":"")}>
+      {shown.length>0?(view==="map"?<AreaAtlas listings={catalog.listings} county={filters.county} onSelect={county=>choose("county",county)}/>:<div className={"property-grid "+(view==="list"?"property-list":"")}>
        {shown.map(home=><PropertyCard key={home.id} home={home} saved={saved.includes(home.id)} compared={compared.includes(home.id)}
          onSave={()=>save(home.id)} onCompare={()=>compare(home.id)} compact={view==="list"}/>)}
-      </div>:<div className="empty-results"><span><Search size={31}/></span><h3>{catalog.mode==="live"&&!catalog.listings.length?"No homes have been published yet.":"No homes match these filters."}</h3><p>Adjust your criteria or clear your filters to explore other options.</p><button type="button" onClick={clear}>Clear filters <ArrowRight size={16}/></button></div>}
+      </div>):<div className="empty-results"><span><Search size={31}/></span><h3>{catalog.mode==="live"&&!catalog.listings.length?"No homes have been published yet.":"No homes match these filters."}</h3><p>Adjust your criteria or clear your filters to explore other options.</p><button type="button" onClick={clear}>Clear filters <ArrowRight size={16}/></button></div>}
+      {compareWarning&&<p className="compare-warning" role="status">{compareWarning}</p>}
       {catalog.mode==="preview"&&<p className="catalog-disclaimer"><ShieldCheck size={16}/> All preview homes and prices are fictional. No property shown here can be booked or purchased.</p>}
     </div>
    </section>
