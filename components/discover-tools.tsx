@@ -55,7 +55,7 @@ export function DiscoverTools({filters,onFiltersChange,counties}:{filters:Filter
    <form className="intent-form" onSubmit={e=>{e.preventDefault();run();}}>
     <label htmlFor="intent-prompt" className="sr-only">Describe a property search</label>
     <input id="intent-prompt" value={prompt} maxLength={180} onChange={e=>setPrompt(e.target.value)} placeholder="e.g. 2 bedrooms in Mombasa under KES 50k with parking"/>
-    <button type="submit"><SearchCheck size={17}/> <span>Find matches</span></button>
+    <button type="submit" aria-label="Find matches"><SearchCheck size={17}/> <span>Find matches</span></button>
    </form>
   </div>
   {interpreted.length>0&&<div className="interpreted-chips" aria-label="Recognized search criteria">{interpreted.map((x,i)=><span key={i}><Check size={13}/>{x}</span>)}</div>}
