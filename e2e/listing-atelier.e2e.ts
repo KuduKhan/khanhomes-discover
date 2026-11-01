@@ -55,6 +55,11 @@ test.describe("KhanHomes Discover v0.7 Listing Atelier",()=>{
   for(const width of [320,390,600,768,1024,1440]){
    await page.setViewportSize({width,height:900});
    await page.goto("/studio");
+   const header=page.locator(".site-header");
+   const brand=await header.locator(".brand").boundingBox();
+   const controls=await header.locator(".header-actions").boundingBox();
+   expect(brand&&controls&&brand.x+brand.width<=controls.x+2,"Header brand and actions overlap at "+width).toBeTruthy();
+   if(width===1440)await expect(header.locator(".desktop-nav")).toBeHidden();
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    expect(overflow,"Atelier horizontal overflow at "+width).toBeLessThanOrEqual(2);
    await expect(page.getByRole("heading",{name:/Present a home with intention/})).toBeVisible();
