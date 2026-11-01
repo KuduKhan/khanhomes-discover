@@ -1,7 +1,7 @@
 "use client";
 import {useEffect,useState} from "react";
 import Link from "next/link";
-import {ArrowLeft,ArrowRight,CheckCircle2,Eye,EyeOff,Heart,LockKeyhole,Mail,ShieldCheck,UserRound,LogOut,CalendarCheck2,RefreshCw} from "lucide-react";
+import {ArrowRight,CheckCircle2,Eye,EyeOff,Heart,LockKeyhole,Mail,ShieldCheck,UserRound,LogOut,CalendarCheck2,RefreshCw} from "lucide-react";
 import {discoverAccountsConfigured,getDiscoverBrowserClient} from "@/lib/discover-browser";
 type OwnRequest={id:string;kind:"viewing"|"enquiry";preferred_at:string|null;status:string;created_at:string;listing_id:string};
 export function SeekerAccount(){
