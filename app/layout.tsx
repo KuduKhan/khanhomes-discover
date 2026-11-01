@@ -5,6 +5,7 @@ export const metadata:Metadata={
  title:{default:"KhanHomes Discovery — Find a place to belong",template:"%s | KhanHomes Discovery"},
  description:"An elegantly connected way to discover rental homes and explore real-estate opportunities. Preview properties are illustrative, not live offers.",
  applicationName:"KhanHomes Discovery",
+ robots:{index:false,follow:false},
  icons:{icon:"/favicon.svg"},
  openGraph:{title:"KhanHomes Discovery",description:"Find your place. Feel at home. An independent experience connected to KhanHomes.",type:"website"}
 };
