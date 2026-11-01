@@ -1,0 +1,55 @@
+/* v0.8 Finance Desk: compact AURA-native financial scenario workspace */
+.finance-page{padding-block:clamp(20px,3vw,38px) clamp(45px,6vw,88px)}
+.finance-intro{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:27px}
+.finance-intro h1{font-size:clamp(34px,4.4vw,60px);line-height:1.11;letter-spacing:-.065em;margin:12px 0}
+.finance-intro h1 em{color:var(--kh-strong)}
+.finance-intro p{font-size:13px;line-height:1.8;color:var(--kh-muted);max-width:77ch;margin:0}
+.finance-preview{display:flex;gap:11px;align-items:center;padding:13px 16px;border-radius:14px;border:1px solid var(--kh-line);background:var(--kh-paper);color:var(--kh-strong);font-size:11px;font-weight:800;flex:0 0 auto}
+.finance-preview span{display:grid;gap:4px}.finance-preview small{color:var(--kh-muted);font-size:10px}
+.finance-layout{display:grid;grid-template-columns:minmax(300px,.9fr) minmax(0,1.1fr);gap:clamp(16px,2.5vw,32px);align-items:start}
+.finance-controls,.finance-results{min-width:0;display:grid;gap:18px}
+.finance-controls{border:1px solid var(--kh-line);background:var(--kh-paper);border-radius:22px;padding:clamp(18px,2.4vw,29px);box-shadow:var(--kh-shadow)}
+.finance-panel-heading{display:flex;align-items:center;gap:12px;min-width:0}
+.finance-panel-icon{display:grid;place-items:center;flex:0 0 43px;height:43px;border-radius:12px;background:var(--kh-soft);color:var(--kh-strong)}
+.finance-panel-heading>div{flex:1;min-width:0}.finance-panel-heading h2{font-size:19px;margin:0 0 5px}.finance-panel-heading p{font-size:11px;color:var(--kh-muted);margin:0}
+.finance-reset{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--kh-line);border-radius:9px;background:var(--kh-soft);padding:9px;color:var(--kh-strong);font-size:11px;font-weight:800}
+.finance-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 13px}
+.finance-field{display:grid;align-content:start;gap:7px;min-width:0}
+.finance-field>span{font-size:11px;color:var(--kh-muted-strong);font-weight:850;line-height:1.4}
+.finance-field input{width:100%;min-width:0;min-height:45px;border:1px solid var(--kh-line);border-radius:11px;background:var(--kh-soft);color:var(--kh-ink);padding:9px 12px;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
+.finance-field small{font-size:10px;line-height:1.55;color:var(--kh-muted)}
+.finance-more{display:flex;align-items:center;justify-content:space-between;gap:9px;border:1px solid var(--kh-line);border-radius:11px;background:var(--kh-soft);color:var(--kh-strong);padding:13px 14px;min-height:44px;font-size:12px;font-weight:850}
+.finance-more[aria-expanded=true] svg{transform:rotate(180deg)}
+.finance-extra{border-top:1px solid var(--kh-line);padding-top:18px}
+.finance-metric-main{display:grid;gap:9px;padding:clamp(21px,3vw,34px);border-radius:22px;background:linear-gradient(125deg,#102f3a,#126450);color:#fff;box-shadow:var(--kh-shadow)}
+.finance-metric-main>span{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:850;letter-spacing:.11em;color:#b6f2d9}
+.finance-metric-main strong{font-family:Manrope,sans-serif;font-size:clamp(32px,4vw,56px);letter-spacing:-.06em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.finance-metric-main small{font-size:11px;color:#d1e8df}
+.finance-stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.finance-stat-grid article{display:grid;align-content:start;gap:10px;padding:clamp(15px,2vw,23px);border:1px solid var(--kh-line);border-radius:17px;background:var(--kh-paper);min-width:0}
+.finance-stat-grid article>span{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--kh-muted-strong);font-weight:800}
+.finance-stat-grid article>span svg{color:var(--kh-strong)}
+.finance-stat-grid strong{font-size:clamp(18px,2.2vw,26px);font-family:Manrope,sans-serif;letter-spacing:-.045em;overflow-wrap:anywhere}
+.finance-stat-grid small{font-size:10px;color:var(--kh-muted);line-height:1.5}
+.finance-share,.finance-comparison{border:1px solid var(--kh-line);background:var(--kh-paper);border-radius:17px;padding:clamp(17px,2.1vw,25px)}
+.finance-share>div:first-child{display:flex;justify-content:space-between;gap:14px;font-size:12px}
+.finance-share>div:first-child>span{color:var(--kh-strong);font-weight:850}
+.finance-share-track{height:9px;background:var(--kh-soft);border-radius:999px;overflow:hidden;margin-top:14px}
+.finance-share-track>span{display:block;height:100%;background:var(--kh-strong);border-radius:inherit;transition:width .25s}
+.finance-share p,.finance-comparison p{font-size:11px;line-height:1.75;color:var(--kh-muted);margin:12px 0 0}
+.finance-comparison h2{font-size:18px;margin:0 0 17px}
+.finance-comparison>div{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--kh-line);font-size:12px}
+.finance-comparison>div strong{font-size:15px;font-variant-numeric:tabular-nums}
+.finance-comparison p{display:flex;align-items:flex-start;gap:8px}
+.finance-comparison p svg{color:var(--kh-strong)}
+.finance-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:25px;padding:19px 23px;border-radius:15px;background:var(--kh-soft);border:1px solid var(--kh-line)}
+.finance-bottom>div{display:flex;align-items:center;gap:10px;color:var(--kh-muted-strong);font-size:11px;line-height:1.7}
+.finance-bottom svg{color:var(--kh-strong)}
+.finance-bottom a{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;color:var(--kh-strong);font-size:12px;font-weight:850}
+@media(max-width:920px){.finance-layout{grid-template-columns:minmax(0,1fr)}.finance-intro{align-items:start;flex-direction:column;gap:13px}.finance-preview{display:flex;max-width:100%;align-self:flex-start}}
+@media(max-width:560px){.finance-fields{grid-template-columns:minmax(0,1fr)}.finance-stat-grid{gap:9px}.finance-stat-grid article{padding:13px}.finance-stat-grid strong{font-size:18px}.finance-bottom{flex-wrap:wrap;padding:15px}.finance-intro h1{font-size:38px}.finance-panel-heading{flex-wrap:wrap}.finance-reset{margin-left:auto}}
+@media(max-width:350px){.finance-stat-grid{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.finance-share-track>span{transition:none}}
+
+/* Discover's growing workspace navigation uses the accessible compact menu before it crowds the brand. */
+@media(min-width:921px) and (max-width:1480px){.desktop-nav{display:none}.mobile-menu-trigger{display:grid}}
