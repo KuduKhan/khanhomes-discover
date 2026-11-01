@@ -17,13 +17,16 @@ test.describe("Finance Desk v0.8",()=>{
   await page.getByRole("button",{name:"Reset"}).click();
   await expect(page.getByLabel("Down payment (%)")).toHaveValue("20");
  });
- test("compact mobile layout never overflows horizontally",async({page})=>{
+ test("compact mobile layout never overflows horizontally",async({page},testInfo)=>{
   for(const width of [320,390,768,1440]){
    await page.setViewportSize({width,height:850});
    await page.goto("/finance");
    await expect(page.getByRole("heading",{name:/Make your next move/i})).toBeVisible();
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    expect(overflow,"Overflow at width "+width).toBeLessThanOrEqual(2);
+   if(testInfo.project.name==="desktop-chromium"&&[390,1440].includes(width)){
+    await page.screenshot({path:"test-results/visual-audit/finance-"+width+".png",fullPage:true,animations:"disabled"});
+   }
   }
  });
 });
