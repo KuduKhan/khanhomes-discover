@@ -38,8 +38,10 @@ export function SiteHeader(){
    <Brand/>
    <nav className="desktop-nav" aria-label="Primary">
     <Link href="/#homes">Explore homes</Link>
-    <Link href="/#how-it-works">How it works</Link>
-    <Link href="/planner">My home planner</Link>
+    <Link href="/match">AURA Match</Link>
+    <Link href="/watch">Search watch</Link>
+    <Link href="/visits">Visit plans</Link>
+    <Link href="/planner">Notebook</Link>
     <Link href="/account"><UserRound size={15}/> My account</Link>
     <a href={parentUrl} target="_blank" rel="noopener noreferrer">KhanHomes OS <ArrowUpRight size={14}/></a>
    </nav>
@@ -60,7 +62,10 @@ export function SiteHeader(){
   </div>
   {menuOpen&&<nav className="mobile-menu" id="mobile-primary" aria-label="Mobile navigation">
    <Link href="/#homes" onClick={()=>setMenuOpen(false)}>Explore homes <Compass size={17}/></Link>
-   <Link href="/#how-it-works" onClick={()=>setMenuOpen(false)}>How it works <Check size={17}/></Link>
+   <Link href="/match" onClick={()=>setMenuOpen(false)}>AURA Match <Compass size={17}/></Link>
+   <Link href="/watch" onClick={()=>setMenuOpen(false)}>Search watch <Check size={17}/></Link>
+   <Link href="/visits" onClick={()=>setMenuOpen(false)}>Tentative visits <Check size={17}/></Link>
+   <Link href="/planner" onClick={()=>setMenuOpen(false)}>My planner <Check size={17}/></Link>
    <Link href="/account" onClick={()=>setMenuOpen(false)}>My account <UserRound size={17}/></Link>
    <a href={parentUrl} rel="noopener noreferrer" target="_blank" onClick={()=>setMenuOpen(false)}>KhanHomes OS <ArrowUpRight size={17}/></a>
   </nav>}
@@ -74,8 +79,8 @@ export function SiteFooter({mode}:{mode:"preview"|"live"}){
     <p>Find your place. Feel at home. A refined house-hunting experience connected to KhanHomes.</p>
     <span className="footer-trust">{mode==="preview"?"Preview catalog · Fictional homes and indicative prices":"Published listing catalog · Check details before decisions"}</span>
    </div>
-   <nav aria-label="Discover links" className="footer-links"><strong>Explore</strong><Link href="/#homes">Search homes</Link><Link href="/#how-it-works">The journey</Link><Link href="/#connection">Connected living</Link><Link href="/account">My Discover account</Link></nav>
-   <nav aria-label="KhanHomes links" className="footer-links"><strong>Connected to</strong><a target="_blank" rel="noopener noreferrer" href={parentUrl}>KhanHomes OS <ArrowUpRight size={14}/></a><Link href="/api/health">System status</Link><a href="https://github.com/KuduKhan/khanhomes-discovery" target="_blank" rel="noopener noreferrer">Project source <ArrowUpRight size={14}/></a></nav>
+   <nav aria-label="Discover links" className="footer-links"><strong>Explore</strong><Link href="/#homes">Search homes</Link><Link href="/match">AURA Match</Link><Link href="/watch">Search watch</Link><Link href="/visits">Visit plans</Link><Link href="/planner">Home notebook</Link><Link href="/#connection">Connected living</Link><Link href="/account">My Discover account</Link></nav>
+   <nav aria-label="KhanHomes links" className="footer-links"><strong>Connected to</strong><a target="_blank" rel="noopener noreferrer" href={parentUrl}>KhanHomes OS <ArrowUpRight size={14}/></a><Link href="/api/health">System status</Link><a href="https://github.com/KuduKhan/khanhomes-discover" target="_blank" rel="noopener noreferrer">Project source <ArrowUpRight size={14}/></a></nav>
   </div>
   <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} KhanHomes Discover</span><span>An independent KhanHomes experience · No payment collection or unapproved listings</span></div>
  </footer>;

@@ -4,6 +4,14 @@
 
 KhanHomes Discover runs in its own repository, deployment and data boundary. It shares the architectural brand emblem, AURA styling, responsive spacing and Daybreak / Aurora / Midnight atmosphere vocabulary with [KhanHomes](https://khanhomes.vercel.app).
 
+## Build milestone: v0.6 guided home hunt
+
+- **AURA Match Studio**: transparent local preference ranking (location, budget, bedrooms/area, amenities), adjustable importance sliders and explainable, inspectable scores. A score is not an ownership verification or property availability guarantee.
+- **Saved Search Watch**: manual, browser-local checks against the catalog returned at page load, first-check baselines and newly visible matches. No background monitoring, email, SMS or push.
+- **Tentative Visit Planner**: private personal visit notes, overlapping time warnings and an RFC 5545 calendar download with Africa/Nairobi timezone and explicitly `TENTATIVE` events. No booking confirmation.
+- **Catalog price context**: optional, sample-size-qualified comparisons with other currently listed homes in the same county/type. Not market valuations; fictional data stays labeled.
+- Compact responsive AURA panels and navigation integration.
+
 ## Build milestone: v0.5 portable home-hunt notebook
 
 The local-only planner now supports a validated JSON **import** alongside export. Imports match only homes in the current catalog, reject malformed/oversized files, and preserve newer local edits instead of silently overwriting them. This is device-local portability, not a cloud backup or shared KhanHomes account.

@@ -12,6 +12,7 @@ import {ListingTrust} from "@/components/listing-trust";
 import {RequestViewing} from "@/components/request-viewing";
 import {ListingReport} from "@/components/listing-report";
 import {ApplicationPath} from "@/components/application-path";
+import {CatalogPriceContext} from "@/components/catalog-context";
 export const dynamic="force-dynamic";
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
  const {slug}=await params;
@@ -52,6 +53,7 @@ export default async function PropertyPage({params}:{params:Promise<{slug:string
     <section className="detail-section status-explainer"><ShieldCheck size={23}/><div><h3>Designed for clarity.</h3><p>{home.source==="demo"?"This fictional home is a UI demonstration. No enquiry, viewing, booking or payment is available.": "Information is a publisher-supplied public snapshot. Confirm current availability and terms independently; an online publication alone is not proof of title, representation or occupancy."}</p></div></section>
     {home.type==="rent"&&<MoveInEstimator monthlyRent={home.priceKes}/>}
     <ListingTrust listing={home}/>
+    <CatalogPriceContext home={home} listings={catalog.listings}/>
     <ListingReport listing={home}/>
     <ApplicationPath/>
    </div>
@@ -63,6 +65,8 @@ export default async function PropertyPage({params}:{params:Promise<{slug:string
     {home.source==="demo"||process.env.NEXT_PUBLIC_DISCOVER_REQUESTS_ENABLED!=="true"?
       <button type="button" className="detail-book-disabled" disabled><Clock3 size={18}/> Viewing requests not yet enabled</button>:
       <RequestViewing home={home}/>}
+    <Link className="detail-back" href="/visits">Plan a tentative visit <ArrowRight size={16}/></Link>
+    <Link className="detail-back" href="/match">Explore AURA Match <ArrowRight size={16}/></Link>
     <Link className="detail-back" href="/#homes">Continue exploring homes <ArrowRight size={16}/></Link>
     <div className="detail-fee-note"><ShieldCheck size={17}/> KhanHomes Discover does not collect deposits or booking fees.</div>
    </aside>

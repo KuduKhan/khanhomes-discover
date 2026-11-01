@@ -4,6 +4,7 @@ import "./globals.css";
 import "./discover-polish.css";
 import "./journey-polish.css";
 import "./planner-polish.css";
+import "./guided-hunt-v06.css";
 export const metadata:Metadata={
  title:{default:"KhanHomes Discover — Find a place to belong",template:"%s | KhanHomes Discover"},
  description:"An elegantly connected way to discover rental homes and explore real-estate opportunities. Preview properties are illustrative, not live offers.",
