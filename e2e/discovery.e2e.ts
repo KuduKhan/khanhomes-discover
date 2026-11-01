@@ -1,5 +1,5 @@
 import {expect,test} from "@playwright/test";
-test.describe("KhanHomes Discovery independent preview",()=>{
+test.describe("KhanHomes Discover independent preview",()=>{
  test("accessible catalogue, rent/sale filtering, saved homes and comparison",async({page})=>{
   await page.goto("/");
   await expect(page.getByRole("heading",{level:1})).toContainText("Find a place");
