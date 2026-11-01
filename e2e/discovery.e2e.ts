@@ -110,6 +110,29 @@ test.describe("KhanHomes Discover independent preview",()=>{
   const history=await request.get("/api/seeker-requests");
   expect(history.status()).toBe(503);
  });
+ test("home hunt planner saves browser-local notes, checklist and ratings across reloads",async({page},info)=>{
+  await page.goto("/");
+  await page.locator(".property-card").first().getByRole("button",{name:/Save /}).click();
+  await page.goto("/planner");
+  await expect(page.getByRole("heading",{name:/Make a more confident choice/})).toBeVisible();
+  await expect(page.locator(".planner-home-tab")).toHaveCount(1);
+  await page.getByRole("checkbox",{name:/Water supply and pressure/}).check();
+  await page.getByRole("button",{name:"Rate 4 out of 5"}).click();
+  await page.getByRole("textbox",{name:"Your private observations"}).fill("Check water pressure in the kitchen. This is a fictional test note.");
+  await expect(page.getByText("10%")).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole("checkbox",{name:/Water supply and pressure/})).toBeChecked();
+  await expect(page.getByRole("textbox",{name:"Your private observations"})).toHaveValue(/fictional test note/);
+  await expect(page.getByRole("button",{name:"Rate 4 out of 5"})).toHaveAttribute("aria-pressed","true");
+  for(const width of [320,390,768,1440]){
+   await page.setViewportSize({width,height:900});
+   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+   expect(overflow,"Planner overflow at "+width).toBeLessThanOrEqual(2);
+   if(info.project.name==="desktop-chromium" && [390,1440].includes(width)){
+    await page.screenshot({path:"test-results/visual-audit/planner-"+width+".png",animations:"disabled"});
+   }
+  }
+ });
  test("atmosphere and dark mode change visual tokens with no authorization impact",async({page})=>{
   await page.goto("/");
   await page.getByRole("button",{name:"Apply Daybreak atmosphere"}).click();
