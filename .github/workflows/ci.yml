@@ -1,4 +1,4 @@
-name: KhanHomes Discovery CI
+name: KhanHomes Discover CI
 on:
   pull_request:
   push:

@@ -1,4 +1,4 @@
--- Separate KHANHOMES DISCOVERY database only. Do not apply to KhanHomes operations.
+-- Separate KHANHOMES DISCOVER database only. Do not apply to KhanHomes operations.
 -- Backend-only listing mirror, explicitly published via signed webhook and service-role RPC.
 begin;
 create extension if not exists pgcrypto;
