@@ -1,7 +1,7 @@
 "use client";
 import {useEffect,useMemo,useState} from "react";
 import Link from "next/link";
-import {ArrowLeft,ArrowRight,BadgeCheck,CalendarDays,Check,CheckSquare2,Download,Heart,House,Info,NotebookPen,Printer,ShieldCheck,Star,Trash2} from "lucide-react";
+import {ArrowRight,BadgeCheck,CalendarDays,Check,CheckSquare2,Download,Heart,Info,NotebookPen,Printer,ShieldCheck,Star,Trash2} from "lucide-react";
 import {type Listing,formatKes} from "@/lib/catalog";
 import {assessmentCompletion,exportSafePlanner,HUNT_CHECKLIST,HUNT_PLANNER_KEY,initialAssessment,safeAssessments,type CheckId,type HomeAssessment} from "@/lib/hunt-planner";
 import {PropertyPhoto} from "@/components/property-card";
