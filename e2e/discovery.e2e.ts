@@ -59,7 +59,7 @@ test.describe("KhanHomes Discover independent preview",()=>{
   await page.reload();
   await page.getByRole("button",{name:/Saved searches \(1\)/}).click();
   await expect(page.getByText("Coastal family homes")).toBeVisible();
-  await page.getByRole("button",{name:"Apply",exact:false}).click();
+  await page.locator(".saved-search-entry").getByRole("button",{name:"Apply"}).click();
   await expect(page.locator(".property-card")).toHaveCount(1);
   await page.getByRole("button",{name:"Area map view"}).click();
   await expect(page.getByRole("region",{name:"Interactive Kenya area overview"})).toBeVisible();
