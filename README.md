@@ -4,6 +4,12 @@
 
 KhanHomes Discover runs in its own repository, deployment and data boundary. It shares the architectural brand emblem, AURA styling, responsive spacing and Daybreak / Aurora / Midnight atmosphere vocabulary with [KhanHomes](https://khanhomes.vercel.app).
 
+## Build milestone: v0.8 Finance Desk
+
+- A standalone, responsive `/finance` planning desk with transparent fixed-rate mortgage amortization, upfront cash-to-buy/rent, recurring ownership costs, income-share indicators and first-year cash-flow comparison.
+- Every scenario is user-entered and stays in component memory; no lender integrations, eligibility decisions, bank quotes or submitted financial data.
+- Tests cover zero interest, conventional amortization, full deposits and invalid numeric inputs. Rental deposits are clearly distinguished from nonrefundable costs.
+
 ## Build milestone: v0.7 Listing Atelier
 
 - A premium, responsive **local-only Listing Atelier** at `/studio` for owners and agents to organize draft property information, price/fee disclosures, general-area attributes and amenities.
