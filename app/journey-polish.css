@@ -122,3 +122,17 @@
  .account-actions button:first-child{grid-column:1/-1}
  .viewing-kind button{font-size:10px}
 }
+
+
+/* Screenshot review: make the account hero vertically concise and stop inline labels colliding. */
+.account-page{min-height:0}
+.account-story{display:grid;justify-items:start;align-content:center}
+.account-story .section-kicker{display:inline-flex;width:max-content;max-width:100%}
+.account-story .account-back{margin-bottom:18px}
+.account-story h1{margin-block:13px 17px}
+.account-story>p{margin-bottom:0}
+@media(max-width:760px){
+ .account-layout{padding-block:24px 37px}
+ .account-story .account-back{margin-bottom:13px}
+ .account-story h1{margin:11px 0}
+}
