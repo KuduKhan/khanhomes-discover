@@ -12,7 +12,8 @@ test.describe("Finance Desk v0.8",()=>{
   await expect(page.locator(".finance-metric-main strong")).toContainText("10,000");
   await page.getByRole("button",{name:/Additional fees and rental assumptions/}).click();
   await page.getByLabel("Alternative monthly rent (KES)").fill("25000");
-  await expect(page.locator(".finance-comparison")).toContainText("25,000");
+  await expect(page.locator(".finance-comparison")).toContainText("KES 350,000");
+  // First-year rent cash includes 12 months, a 1-month deposit, and moving allowance.
   await page.getByRole("button",{name:"Reset"}).click();
   await expect(page.getByLabel("Down payment (%)")).toHaveValue("20");
  });
