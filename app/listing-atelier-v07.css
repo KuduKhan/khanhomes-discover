@@ -148,3 +148,8 @@
 @media(prefers-reduced-motion:reduce){
  .atelier-draft-tab,.atelier-add{transition:none}
 }
+/* Shared header: switch to compact mobile navigation before brand/action collisions. */
+@media(max-width:1560px){
+ .desktop-nav{display:none}
+ .mobile-menu-trigger{display:grid}
+}
