@@ -38,7 +38,7 @@ test.describe("KhanHomes Discover v0.7 Listing Atelier",()=>{
   await page.getByRole("button",{name:"Create first draft"}).click();
   await page.getByRole("textbox",{name:/Description/}).fill("Email example@private.com to book");
   await page.getByRole("button",{name:"Export draft JSON"}).click();
-  await expect(page.getByRole("alert")).toContainText("Remove email addresses and phone numbers");
+  await expect(page.locator(".atelier-error")).toContainText("Remove email addresses and phone numbers");
  });
  test("drafts can be duplicated and deleted while approval checks reset",async({page})=>{
   await page.goto("/studio");
