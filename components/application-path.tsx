@@ -1,4 +1,4 @@
-import {ArrowRight,CheckCircle2,ClipboardList,FileText,LockKeyhole,ShieldCheck} from "lucide-react";
+import {CheckCircle2,ClipboardList,FileText,LockKeyhole,ShieldCheck} from "lucide-react";
 export function ApplicationPath(){
  return <section className="application-path" aria-label="Rental application and move-in roadmap">
   <div className="application-path-heading"><ClipboardList size={22}/><div><span className="section-kicker">FROM DISCOVERY TO HOME</span><h2>Your rental journey.</h2><p>Know what happens after an authorized viewing and approval.</p></div></div>
