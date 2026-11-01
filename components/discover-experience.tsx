@@ -2,13 +2,12 @@
 import {useEffect,useMemo,useRef,useState} from "react";
 import Link from "next/link";
 import {
- ArrowRight,ArrowUpRight,BadgeCheck,Building2,Check,CheckCircle2,ChevronDown,Compass,
+ ArrowRight,ArrowUpRight,BadgeCheck,Building2,CheckCircle2,ChevronDown,Compass,
  GitCompareArrows,Heart,House,KeyRound,MapPin,Search,ShieldCheck,SlidersHorizontal,
- Sparkles,Users,WalletCards,X,Grid2X2,Rows3,MoveUpRight,CalendarClock,BedDouble
+ Sparkles,Users,X,Grid2X2,Rows3,MoveUpRight
 } from "lucide-react";
 import {type Listing,PREVIEW_NOTICE,formatKes} from "@/lib/catalog";
 import {DEFAULT_FILTERS,filterListings,uniqueCounties,type Filters,type SortOrder} from "@/lib/filters";
-import {Brand} from "@/components/brand";
 import {PropertyCard,PropertyPhoto} from "@/components/property-card";
 import {SiteHeader,SiteFooter} from "@/components/site-chrome";
 
@@ -45,6 +44,7 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
  },[catalog.listings,filters,savedOnly,saved]);
  const counties=useMemo(()=>uniqueCounties(catalog.listings),[catalog.listings]);
  const chosen=catalog.listings.filter(home=>compared.includes(home.id));
+ useEffect(()=>{if(compareVisible)document.getElementById("compare-homes")?.scrollIntoView({behavior:"smooth",block:"start"});},[compareVisible]);
  const featured=catalog.listings[0];
  return <div className="discovery-site">
   <a href="#main" className="skip-link">Skip to content</a>
@@ -162,7 +162,7 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
   {compared.length>0&&<div className="compare-dock" role="region" aria-label="Compare homes">
    <div className="compare-dock-inner"><div className="compare-indicator"><GitCompareArrows size={20}/><span><strong>{compared.length} of 3 selected</strong><small>Compare your favorites</small></span></div>
     <div className="compared-titles">{chosen.map(home=><span key={home.id}>{home.title}<button onClick={()=>compare(home.id)} aria-label={"Remove "+home.title} type="button"><X size={13}/></button></span>)}</div>
-    <button type="button" className="compare-open" disabled={compared.length<2} onClick={()=>{setCompareVisible(true);document.getElementById("compare-homes")?.scrollIntoView({behavior:"smooth"});}}>Compare <ArrowRight size={16}/></button>
+    <button type="button" className="compare-open" disabled={compared.length<2} onClick={()=>setCompareVisible(true)}>Compare <ArrowRight size={16}/></button>
     <button type="button" className="compare-dismiss" onClick={()=>{setCompared([]);setCompareVisible(false)}} aria-label="Clear comparison"><X size={18}/></button>
    </div>
   </div>}
