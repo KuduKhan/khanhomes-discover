@@ -156,7 +156,7 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
     </div>
    </section>
    <section className="closing-section">
-    <div className="wrap closing-panel"><div><span>KHANHOMES DISCOVERY</span><h2>Somewhere beautiful<br/>begins with <em>home.</em></h2><p>Find a space that feels like the beginning of something wonderful.</p></div><button type="button" onClick={()=>resultsRef.current?.scrollIntoView({behavior:"smooth"})}>Explore homes <ArrowRight size={18}/></button><span className="closing-glyph" aria-hidden="true"><Building2 size={165} strokeWidth={.65}/></span></div>
+    <div className="wrap closing-panel"><div><span>KHANHOMES DISCOVER</span><h2>Somewhere beautiful<br/>begins with <em>home.</em></h2><p>Find a space that feels like the beginning of something wonderful.</p></div><button type="button" onClick={()=>resultsRef.current?.scrollIntoView({behavior:"smooth"})}>Explore homes <ArrowRight size={18}/></button><span className="closing-glyph" aria-hidden="true"><Building2 size={165} strokeWidth={.65}/></span></div>
    </section>
   </main>
   {compared.length>0&&<div className="compare-dock" role="region" aria-label="Compare homes">

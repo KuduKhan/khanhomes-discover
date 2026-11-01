@@ -9,7 +9,7 @@ export function KhanHomesEmblem({className=""}:{className?:string}){
   </svg>;
 }
 export function Brand({href="/",withDiscover=true}:{href?:string;withDiscover?:boolean}){
- return <Link className="brand" href={href} aria-label="KhanHomes Discovery home">
+ return <Link className="brand" href={href} aria-label="KhanHomes Discover home">
   <span className="brand-mark"><KhanHomesEmblem/></span>
   <span className="brand-words">Khan<span>Homes</span>{withDiscover&&<small>DISCOVERY</small>}</span>
  </Link>;
