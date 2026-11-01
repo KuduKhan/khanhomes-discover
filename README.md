@@ -4,6 +4,13 @@
 
 KhanHomes Discover runs in its own repository, deployment and data boundary. It shares the architectural brand emblem, AURA styling, responsive spacing and Daybreak / Aurora / Midnight atmosphere vocabulary with [KhanHomes](https://khanhomes.vercel.app).
 
+## Build milestone: v0.7 Listing Atelier
+
+- A premium, responsive **local-only Listing Atelier** at `/studio` for owners and agents to organize draft property information, price/fee disclosures, general-area attributes and amenities.
+- Up to 20 local drafts, review progress indicators, duplicate/delete, draft concept preview and JSON export; no photos or personal resident information uploaded.
+- Preparation checkboxes are **not verified listing badges**. Exported files explicitly say `draftOnly`, `published:false`, and `approved:false`. Export blocks obvious email addresses and phone numbers from public text.
+- Actual publication requires an independent KhanHomes manager authorization, approved media, certified listing data, secure signing and a durable publishing outbox. No user can publish from this public/browser-local studio.
+
 ## Build milestone: v0.6 guided home hunt
 
 - **AURA Match Studio**: transparent local preference ranking (location, budget, bedrooms/area, amenities), adjustable importance sliders and explainable, inspectable scores. A score is not an ownership verification or property availability guarantee.

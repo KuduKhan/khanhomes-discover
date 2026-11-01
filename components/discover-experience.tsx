@@ -158,6 +158,7 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
       <h2>A home is just<br/>the <em>beginning.</em></h2>
       <p>Discover brings a thoughtful way to find a place. KhanHomes OS helps authorized owners and managers care for the people, properties and operations behind it.</p>
       <a href={parentUrl} target="_blank" rel="noopener noreferrer" className="connection-cta">Explore KhanHomes OS <ArrowUpRight size={17}/></a>
+      <Link href="/studio" className="atelier-cta">Prepare a private listing draft <ArrowRight size={16}/></Link>
      </div>
      <div className="connection-steps" aria-label="Connected journey">
       <article><span><Search size={21}/></span><div><small>01 / DISCOVER</small><h3>Explore possibilities.</h3><p>Search, save and compare curated homes without the noise.</p></div></article>
