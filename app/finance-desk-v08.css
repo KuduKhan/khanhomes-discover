@@ -50,3 +50,6 @@
 @media(max-width:560px){.finance-fields{grid-template-columns:minmax(0,1fr)}.finance-stat-grid{gap:9px}.finance-stat-grid article{padding:13px}.finance-stat-grid strong{font-size:18px}.finance-bottom{flex-wrap:wrap;padding:15px}.finance-intro h1{font-size:38px}.finance-panel-heading{flex-wrap:wrap}.finance-reset{margin-left:auto}}
 @media(max-width:350px){.finance-stat-grid{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.finance-share-track>span{transition:none}}
+
+/* Discover's growing workspace navigation uses the accessible compact menu before it crowds the brand. */
+@media(min-width:921px) and (max-width:1480px){.desktop-nav{display:none}.mobile-menu-trigger{display:grid}}
