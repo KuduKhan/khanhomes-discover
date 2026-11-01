@@ -4,6 +4,10 @@
 
 KhanHomes Discover runs in its own repository, deployment and data boundary. It shares the architectural brand emblem, AURA styling, responsive spacing and Daybreak / Aurora / Midnight atmosphere vocabulary with [KhanHomes](https://khanhomes.vercel.app).
 
+## Build milestone: v0.5 portable home-hunt notebook
+
+The local-only planner now supports a validated JSON **import** alongside export. Imports match only homes in the current catalog, reject malformed/oversized files, and preserve newer local edits instead of silently overwriting them. This is device-local portability, not a cloud backup or shared KhanHomes account.
+
 ## Build milestone: v0.4 browser-local home-hunt planning
 
 A private, browser-local planning workspace is available at `/planner` with saved favorite homes, custom notes, a 10-item viewing checklist, personal ratings, optional local visit dates, JSON export and print styling. These are subjective planning aids—not real appointments, certified inspections or financial applications. All notes stay on the current device; do not enter IDs, passwords or sensitive access details.
