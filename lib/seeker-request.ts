@@ -11,6 +11,16 @@ export const seekerRequestSchema=z.object({
  if(v.kind==="enquiry"&&v.preferredAt)ctx.addIssue({code:"custom",message:"Enquiry must not include an appointment",path:["preferredAt"]});
 });
 export type SeekerRequest=z.infer<typeof seekerRequestSchema>;
+/** Require same-origin requests for private bearer-token writes. */
+export function validSameOrigin(request:Request):boolean{
+ const origin=request.headers.get("origin");
+ if(!origin)return false;
+ try{
+  const o=new URL(origin),r=new URL(request.url);
+  const secure=o.protocol==="https:"||o.hostname==="localhost"||o.hostname==="127.0.0.1";
+  return secure&&o.origin===r.origin;
+ }catch{return false;}
+}
 export function requestDateIsValid(request:SeekerRequest,now=Date.now()):boolean{
  if(request.kind==="enquiry")return true;
  if(!request.preferredAt)return false;
