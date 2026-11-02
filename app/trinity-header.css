@@ -151,3 +151,17 @@
  .trinity-header :is(*, *::before, *::after){animation:none!important;transition:none!important}
 }
 @keyframes trinity-appear{from{opacity:.35;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+
+
+/* Trinity v2.0 brand hierarchy and direct ecosystem switching. */
+.trinity-header .trinity-brand-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;min-width:0}
+.trinity-header .trinity-brand-tagline{font:750 8px/1.25 "DM Sans",system-ui,sans-serif;letter-spacing:.16em;color:var(--trinity-muted);white-space:nowrap}
+.trinity-header .trinity-product-tabs{display:inline-flex;align-items:center;gap:3px;flex:0 1 auto;min-width:0;border:1px solid var(--trinity-line);background:color-mix(in srgb,var(--trinity-accent) 5%,var(--trinity-surface));border-radius:13px;padding:4px}
+.trinity-header .trinity-product-tabs>a{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 11px;border-radius:9px;color:var(--trinity-muted);font:750 11px/1.2 "DM Sans",system-ui,sans-serif;text-decoration:none;white-space:nowrap}
+.trinity-header .trinity-product-tabs>a[aria-current="page"]{background:var(--trinity-surface);color:var(--trinity-accent);box-shadow:0 2px 8px rgba(9,40,42,.09)}
+.trinity-header .trinity-product-tabs>a:hover{color:var(--trinity-accent)}
+@media(min-width:1121px){.trinity-header .trinity-product-nav{display:none}}
+@media(max-width:1320px) and (min-width:1121px){.trinity-header .trinity-primary.desktop-nav.site-links{gap:8px}.trinity-header .trinity-product-tabs>a{padding-inline:8px}.trinity-header .trinity-cta.header-cta{padding-inline:10px}}
+@media(max-width:1120px){.trinity-header .trinity-product-tabs{display:none}}
+@media(max-width:420px){.trinity-header .trinity-brand-tagline{font-size:7px;letter-spacing:.10em}}
+@media(prefers-reduced-motion:reduce){.trinity-header *, .trinity-header *::before,.trinity-header *::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
