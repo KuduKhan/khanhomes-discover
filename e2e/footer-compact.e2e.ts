@@ -8,7 +8,8 @@ test("Discover footer is compact and fully usable from narrow phones to desktop"
   const footer=page.locator(".site-footer");
   await expect(footer).toBeVisible();
   await expect(footer.getByRole("navigation",{name:"Discover links"}).getByRole("link")).toHaveCount(9);
-  await expect(footer.getByRole("navigation",{name:"KhanHomes links"}).getByRole("link")).toHaveCount(3);
+  await expect(footer.getByRole("navigation",{name:"KhanHomes links"}).getByRole("link")).toHaveCount(4);
+  await expect(footer.locator(".kh-emblem")).toBeVisible();
   const geometry=await footer.evaluate(el=>({
    height:el.getBoundingClientRect().height,
    width:el.getBoundingClientRect().width,
