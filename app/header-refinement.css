@@ -15,6 +15,11 @@
 .site-header .header-cta{font-size:12px;padding-inline:13px}
 .site-header .brand{flex:none}
 .site-header .atmosphere-picker{flex:none}
+/* Override legacy Finance Desk responsive rules that hid desktop navigation through 1480px. */
+@media(min-width:1121px){
+ .site-header .desktop-nav{display:flex}
+ .site-header .mobile-menu-trigger{display:none}
+}
 @media(max-width:1120px){
  .site-header .desktop-nav{display:none}
  .site-header .mobile-menu-trigger{display:grid}
