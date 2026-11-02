@@ -110,8 +110,11 @@ export function TrinityHeader({product}:{product:Product}){
   <div className="trinity-inner header-inner">
    <Link href="/" className="trinity-brand brand khx-brand" aria-label={"KhanHomes "+menu.name+" home"}>
     <span className="trinity-logo-wrap brand-mark"><Image className="kh-emblem" src="/brand/khanhomes-mark.svg" alt="" width={34} height={34} priority/></span>
-    <span className="trinity-wordmark">Khan<span>Homes</span></span>
+    <span className="trinity-brand-copy"><span className="trinity-wordmark">Khan<span>Homes</span></span><span className="trinity-brand-tagline">PROPERTY INTELLIGENCE</span></span>
    </Link>
+   <nav className="trinity-product-tabs" aria-label="KhanHomes products">
+    {products.map(({id,label})=><a key={id} href={productOrigins[id]} aria-current={id===product?"page":undefined}>{label}</a>)}
+   </nav>
    <nav className="trinity-product-nav" aria-label="KhanHomes product switcher">
     <button ref={productButton} type="button" className="trinity-product-button" aria-label="Switch KhanHomes product"
       aria-expanded={productOpen} aria-controls={productId}
