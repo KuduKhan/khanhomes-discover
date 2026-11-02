@@ -135,11 +135,13 @@ test.describe("KhanHomes Discover independent preview",()=>{
  });
  test("atmosphere and dark mode change visual tokens with no authorization impact",async({page})=>{
   await page.goto("/");
+  await page.getByRole("button",{name:"Open Appearance Studio"}).click();
   await page.getByRole("button",{name:"Apply Daybreak atmosphere"}).click();
   await expect(page.locator("html")).toHaveAttribute("data-atmosphere","daybreak");
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-atmosphere","daybreak");
-  await page.getByRole("button",{name:"Switch to dark mode"}).click();
+  await page.getByRole("button",{name:"Open Appearance Studio"}).click();
+  await page.getByRole("button",{name:"Use dark mode"}).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme","dark");
  });
 });
