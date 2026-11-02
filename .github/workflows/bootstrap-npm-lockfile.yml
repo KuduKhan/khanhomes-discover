@@ -1,0 +1,29 @@
+name: Bootstrap deterministic npm lockfiles (temporary)
+on:
+  push:
+    branches:
+      - fix/discover-brand-source-parity-v082
+    paths:
+      - ".github/workflows/bootstrap-npm-lockfile.yml"
+permissions:
+  contents: write
+jobs:
+  lockfiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Resolve lockfiles without running package lifecycle scripts
+        run: |
+          npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Commit only npm lockfiles to this reviewed feature branch
+        run: |
+          git add -- package-lock.json
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'chore: capture exact transitive npm dependency resolution'
+          git push origin HEAD:fix/discover-brand-source-parity-v082
