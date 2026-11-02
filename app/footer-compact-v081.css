@@ -84,26 +84,30 @@
 @media(max-width:680px) {
   .site-footer .footer-grid {
     grid-template-columns:minmax(0,1fr);
-    gap:14px;
-    padding-block:19px 17px;
+    gap:10px;
+    padding-block:14px 12px;
   }
-  .site-footer .footer-identity {display:grid;justify-items:start;gap:8px;}
+  .site-footer .footer-identity {display:grid;justify-items:start;gap:5px;}
   .site-footer .footer-identity p {margin:0;max-width:55ch;}
   .site-footer .footer-trust {margin:0;}
   .site-footer .footer-links[aria-label="Discover links"] {
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:0 13px;
-    padding-top:10px;
+    padding-top:7px;
     border-top:1px solid var(--kh-line);
   }
-  .site-footer .footer-links a {min-height:34px;font-size:11px;}
+  .site-footer .footer-links a {min-height:30px;padding-block:2px;font-size:11px;}
   .site-footer .footer-links[aria-label="KhanHomes links"] {
     grid-column:auto;
-    padding-top:9px;
-    gap:2px 15px;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    align-items:start;
+    gap:2px 9px;
+    padding-top:6px;
   }
-  .site-footer .footer-links[aria-label="KhanHomes links"] strong {width:100%;margin-bottom:2px;}
-  .site-footer .footer-bottom {align-items:flex-start;gap:5px;padding-top:10px;}
+  .site-footer .footer-links[aria-label="KhanHomes links"] strong {grid-column:1/-1;width:auto;margin-bottom:2px;}
+  .site-footer .footer-links[aria-label="KhanHomes links"] a {min-width:0;min-height:30px;font-size:10.5px;overflow-wrap:anywhere;}
+  .site-footer .footer-bottom {align-items:flex-start;gap:4px;padding-block:8px max(10px,env(safe-area-inset-bottom));}
 }
 @media(max-width:360px) {
   .site-footer .footer-grid {gap:12px;}

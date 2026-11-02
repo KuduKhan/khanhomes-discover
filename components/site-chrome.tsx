@@ -3,12 +3,14 @@ import {useEffect,useRef,useState} from "react";
 import Link from "next/link";
 import {ArrowUpRight,Check,Compass,Menu,Moon,Sun,SunMedium,Waves,MoonStar,X,UserRound,Wallet} from "lucide-react";
 import {Brand} from "@/components/brand";
+import {EcosystemSwitcher} from "@/components/ecosystem-switcher";
+import {productOrigins} from "@/lib/product-origins";
 
 const atmospheres=[{id:"aurora",label:"Aurora",Icon:Waves},{id:"daybreak",label:"Daybreak",Icon:SunMedium},{id:"midnight",label:"Midnight",Icon:MoonStar}] as const;
 type Atmosphere=(typeof atmospheres)[number]["id"];
 type Theme="light"|"dark";
-const parentUrl=process.env.NEXT_PUBLIC_KHANHOMES_URL||"https://khanhomes.vercel.app";
-const buildUrl=process.env.NEXT_PUBLIC_KHANHOMES_BUILD_URL?.startsWith("https://")?process.env.NEXT_PUBLIC_KHANHOMES_BUILD_URL.replace(/\/$/,""):parentUrl+"/build";
+const parentUrl=productOrigins.home;
+const buildUrl=productOrigins.build;
 export function SiteHeader(){
  const [theme,setTheme]=useState<Theme>("light");
  const [atmosphere,setAtmosphere]=useState<Atmosphere>("aurora");
@@ -63,6 +65,7 @@ export function SiteHeader(){
     </button>
    </div>
   </div>
+  <EcosystemSwitcher active="discover"/>
   {menuOpen&&<nav className="mobile-menu" id="mobile-primary" aria-label="Mobile navigation">
    <Link href="/#homes" onClick={()=>setMenuOpen(false)}>Explore homes <Compass size={17}/></Link>
    <Link href="/match" onClick={()=>setMenuOpen(false)}>AURA Match <Compass size={17}/></Link>
@@ -72,7 +75,8 @@ export function SiteHeader(){
    <Link href="/studio" onClick={()=>setMenuOpen(false)}>Listing Atelier <Check size={17}/></Link>
    <Link href="/finance" onClick={()=>setMenuOpen(false)}>Finance Desk <Wallet size={17}/></Link>
    <Link href="/account" onClick={()=>setMenuOpen(false)}>My account <UserRound size={17}/></Link>
-   <a href={parentUrl+"/ecosystem"} rel="noopener noreferrer" target="_blank" onClick={()=>setMenuOpen(false)}>KhanHomes ecosystem <ArrowUpRight size={17}/></a>
+   <a href={parentUrl+"/ecosystem"} rel="noopener noreferrer" onClick={()=>setMenuOpen(false)}>KhanHomes ecosystem <ArrowUpRight size={17}/></a>
+   <a href={buildUrl} onClick={()=>setMenuOpen(false)}>KhanHomes Build <ArrowUpRight size={17}/></a>
   </nav>}
  </header>;
 }
@@ -85,7 +89,7 @@ export function SiteFooter({mode}:{mode:"preview"|"live"}){
     <span className="footer-trust">{mode==="preview"?"Preview catalog · Fictional homes and indicative prices":"Published listing catalog · Check details before decisions"}</span>
    </div>
    <nav aria-label="Discover links" className="footer-links"><strong>Explore</strong><Link href="/#homes">Search homes</Link><Link href="/match">AURA Match</Link><Link href="/watch">Search watch</Link><Link href="/visits">Visit plans</Link><Link href="/planner">Home notebook</Link><Link href="/studio">Listing Atelier</Link><Link href="/finance">Finance Desk</Link><Link href="/#connection">Connected living</Link><Link href="/account">My Discover account</Link></nav>
-   <nav aria-label="KhanHomes links" className="footer-links"><strong>Connected to</strong><a target="_blank" rel="noopener noreferrer" href={parentUrl+"/ecosystem"}>KhanHomes ecosystem <ArrowUpRight size={14}/></a><a target="_blank" rel="noopener noreferrer" href={buildUrl}>KhanHomes Build <ArrowUpRight size={14}/></a><Link href="/api/health">System status</Link><a href="https://github.com/KuduKhan/khanhomes-discover" target="_blank" rel="noopener noreferrer">Project source <ArrowUpRight size={14}/></a></nav>
+   <nav aria-label="KhanHomes links" className="footer-links"><strong>Connected to</strong><a href={parentUrl}>KhanHomes management <ArrowUpRight size={14}/></a><a href={parentUrl+"/ecosystem"}>All KhanHomes products <ArrowUpRight size={14}/></a><a href={buildUrl}>KhanHomes Build <ArrowUpRight size={14}/></a><Link href="/api/health">System status</Link><a href="https://github.com/KuduKhan/khanhomes-discover" target="_blank" rel="noopener noreferrer">Project source <ArrowUpRight size={14}/></a></nav>
   </div>
   <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} KhanHomes Discover</span><span>Part of the KhanHomes ecosystem · No payment collection or unapproved listings</span></div>
  </footer>;
