@@ -1,0 +1,153 @@
+/* KHANHOMES TRINITY HEADER V2.0 — canonical shared contract, verbatim across three apps */
+.trinity-header.site-header.khx-top{
+ --trinity-surface:var(--family-surface,#fff);
+ --trinity-ink:var(--family-ink,#173c40);
+ --trinity-muted:#557076;
+ --trinity-line:var(--family-border,#dbe9e2);
+ --trinity-accent:var(--family-accent,#147b69);
+ position:sticky;top:0;z-index:100;width:100%;max-width:100%;overflow:visible;
+ background:color-mix(in srgb,var(--trinity-surface) 96%,transparent);
+ color:var(--trinity-ink);border-bottom:1px solid var(--trinity-line);
+ backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+ box-shadow:0 4px 24px rgba(12,48,48,.045);
+ isolation:isolate;
+}
+.trinity-header[data-trinity-product="discover"]{
+ --trinity-surface:var(--kh-paper,#fff);
+ --trinity-ink:var(--kh-ink,#173c40);
+ --trinity-muted:var(--kh-muted-strong,#557076);
+ --trinity-line:var(--kh-line,#dbe9e2);
+ --trinity-accent:var(--kh-strong,#147b69);
+}
+.trinity-header .trinity-inner.header-inner{
+ width:min(1320px,calc(100% - clamp(28px,4vw,72px)));margin-inline:auto;
+ min-height:72px;display:flex;align-items:center;justify-content:space-between;
+ gap:clamp(8px,1.3vw,20px);flex-wrap:nowrap;padding:0;min-width:0;
+}
+.trinity-header .trinity-brand.brand.khx-brand{
+ display:inline-flex;align-items:center;gap:9px;flex:0 0 auto;white-space:nowrap;
+ font:800 19px/1.1 Manrope,"DM Sans",system-ui,sans-serif;letter-spacing:-.065em;
+ color:var(--trinity-ink);text-decoration:none;padding:0;background:none;min-width:0;
+}
+.trinity-header .trinity-logo-wrap.brand-mark{
+ width:39px;height:39px;flex:0 0 39px;display:grid;place-items:center;
+ border-radius:12px;border:1px solid #d7e8df;background:linear-gradient(140deg,#f9fffb,#eaf6f0);
+ box-shadow:0 4px 12px rgba(16,89,70,.09);padding:0;
+}
+.trinity-header .trinity-logo-wrap .kh-emblem{width:31px;height:31px;object-fit:contain;display:block}
+.trinity-header .trinity-wordmark{font-weight:800;color:var(--trinity-ink)}
+.trinity-header .trinity-wordmark>span{color:#147b69} /* Official brand emerald never theme-tinted. */
+.trinity-product-nav{position:relative;display:flex;flex:0 0 auto;min-width:0}
+.trinity-header :is(.trinity-product-button,.trinity-icon-button,.trinity-mobile-trigger,.trinity-more>button){
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ min-height:43px;padding:9px 11px;border:1px solid var(--trinity-line);border-radius:12px;
+ background:var(--trinity-surface);color:var(--trinity-ink);cursor:pointer;
+ font:700 12px/1.3 "DM Sans",system-ui,sans-serif;white-space:nowrap;
+}
+.trinity-header .trinity-product-button{background:color-mix(in srgb,var(--trinity-accent) 7%,var(--trinity-surface))}
+.trinity-header .trinity-product-button>svg:first-child{color:var(--trinity-accent)}
+.trinity-header .trinity-product-button[aria-expanded="true"]{border-color:var(--trinity-accent)}
+.trinity-header .trinity-primary.desktop-nav.site-links{
+ display:flex;align-items:center;justify-content:center;flex:1 1 auto;min-width:0;
+ gap:clamp(9px,1.45vw,22px);margin:0;padding:0;
+}
+.trinity-header .trinity-primary>a,.trinity-header .trinity-more>button{
+ text-decoration:none;display:inline-flex;align-items:center;justify-content:center;
+ font:750 12px/1.3 "DM Sans",system-ui,sans-serif;min-height:42px;
+ color:var(--trinity-muted);white-space:nowrap;letter-spacing:0;transition:color .18s ease;
+}
+.trinity-header .trinity-primary>a:hover,.trinity-header .trinity-more>button:hover{color:var(--trinity-accent)}
+.trinity-header .trinity-primary>a[aria-current="page"]{color:var(--trinity-accent);box-shadow:inset 0 -2px var(--trinity-accent)}
+.trinity-more,.trinity-appearance{position:relative;flex:0 0 auto}
+.trinity-header .trinity-more>button{border:0;background:none;padding-inline:2px;min-width:0}
+.trinity-header .trinity-actions.header-actions{display:flex;align-items:center;gap:8px;flex:none;margin:0}
+.trinity-header .trinity-icon-button{width:43px;min-width:43px;padding:0}
+.trinity-header .trinity-icon-button>svg{color:var(--trinity-accent)}
+.trinity-header .trinity-cta.header-cta{
+ display:inline-flex;align-items:center;gap:8px;min-height:43px;border:1px solid transparent;
+ border-radius:12px;padding:10px 15px;background:#102d3b;color:#fff;
+ font:800 12px/1.2 "DM Sans",system-ui,sans-serif;white-space:nowrap;text-decoration:none;
+ box-shadow:0 7px 18px rgba(12,41,58,.12);
+}
+.trinity-header .trinity-cta:hover{background:#17485a;transform:translateY(-1px)}
+.trinity-header .trinity-mobile-trigger.mobile-menu-trigger{display:none;width:43px;min-width:43px;padding:0}
+.trinity-header .trinity-popover{
+ position:absolute;top:calc(100% + 11px);z-index:110;min-width:228px;
+ padding:10px;border:1px solid var(--trinity-line);border-radius:16px;
+ background:var(--trinity-surface);color:var(--trinity-ink);
+ box-shadow:0 24px 52px rgba(9,35,48,.16);
+ animation:trinity-appear .16s ease-out both;
+}
+.trinity-header .trinity-product-popover{left:0;width:270px}
+.trinity-header .trinity-more-popover{right:0;min-width:190px;display:grid;gap:2px}
+.trinity-header .trinity-more-popover>a{
+ display:block;padding:11px 12px;border-radius:9px;min-height:42px;color:var(--trinity-ink);
+ font:700 12px "DM Sans",system-ui,sans-serif;text-decoration:none;
+}
+.trinity-header .trinity-more-popover>a:hover{color:var(--trinity-accent);background:color-mix(in srgb,var(--trinity-accent) 9%,var(--trinity-surface))}
+.trinity-popover-kicker{display:block;padding:5px 9px 11px;color:var(--trinity-muted);font:800 9px "DM Sans",system-ui,sans-serif;letter-spacing:.14em}
+.trinity-header .trinity-product-option{
+ display:flex;align-items:center;gap:12px;min-height:56px;padding:9px;border-radius:11px;
+ color:var(--trinity-ink);text-decoration:none;background:transparent;
+}
+.trinity-header .trinity-product-option[aria-current="page"],.trinity-header .trinity-product-option:hover{background:color-mix(in srgb,var(--trinity-accent) 10%,var(--trinity-surface))}
+.trinity-header .trinity-product-option>svg:first-child{color:var(--trinity-accent)}
+.trinity-product-option>span{display:grid;gap:3px;flex:1;min-width:0}
+.trinity-product-option strong{font-size:12px}.trinity-product-option small{font-size:10px;color:var(--trinity-muted)}
+.trinity-popover-note{display:block;margin-top:8px;padding:10px 7px 2px;border-top:1px solid var(--trinity-line);color:var(--trinity-muted);font-size:10px}
+.trinity-header .trinity-appearance-popover{right:0;width:290px;padding:17px}
+.trinity-popover-title{font:800 15px Manrope,sans-serif;display:block;margin-bottom:5px}
+.trinity-popover-subtitle{display:block;color:var(--trinity-muted);font:500 11px/1.5 "DM Sans",system-ui,sans-serif;margin-bottom:14px}
+.trinity-swatches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.trinity-header .trinity-swatch{
+ display:grid;justify-items:center;align-content:center;gap:6px;position:relative;
+ padding:10px 3px;min-height:84px;background:var(--trinity-surface);
+ border:1px solid var(--trinity-line);border-radius:11px;color:var(--trinity-ink);
+ font:750 10px "DM Sans",system-ui,sans-serif;cursor:pointer;
+}
+.trinity-header .trinity-swatch[aria-pressed="true"]{border-color:var(--trinity-accent);box-shadow:0 0 0 1px var(--trinity-accent)}
+.trinity-swatch-sample{width:29px;height:29px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.trinity-swatch>svg{position:absolute;top:4px;right:4px;color:var(--trinity-accent)}
+.trinity-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;margin-top:12px;background:color-mix(in srgb,var(--trinity-accent) 8%,var(--trinity-surface));border-radius:11px}
+.trinity-header .trinity-modes>button{
+ display:flex;align-items:center;justify-content:center;gap:3px;min-height:38px;border:0;border-radius:8px;
+ background:transparent;color:var(--trinity-ink);font:700 10px "DM Sans",system-ui,sans-serif;cursor:pointer;
+}
+.trinity-header .trinity-modes>button[aria-pressed="true"]{background:var(--trinity-surface);box-shadow:0 2px 6px rgba(0,0,0,.08);color:var(--trinity-accent)}
+.trinity-header :is(button,a):focus-visible{outline:2px solid var(--trinity-accent);outline-offset:3px}
+.trinity-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.trinity-header .trinity-mobile-panel.mobile-menu{
+ position:absolute;top:100%;left:0;right:0;z-index:105;width:100%;max-width:100%;
+ max-height:min(75dvh,600px);overflow-y:auto;display:none;gap:5px;
+ background:var(--trinity-surface);border-top:1px solid var(--trinity-line);
+ border-bottom:1px solid var(--trinity-line);box-shadow:0 23px 42px rgba(6,33,44,.15);
+ padding:15px clamp(16px,5vw,32px);
+}
+.trinity-header .trinity-mobile-panel>a{min-height:44px;padding:12px;border-radius:10px;text-decoration:none;color:var(--trinity-ink);background:transparent;font-size:13px;font-weight:700}
+.trinity-header .trinity-mobile-panel>a:hover{background:color-mix(in srgb,var(--trinity-accent) 9%,var(--trinity-surface))}
+.trinity-header .trinity-mobile-panel .trinity-mobile-cta{display:flex;justify-content:space-between;align-items:center;background:#102d3b;color:#fff;margin-top:7px}
+@media(max-width:1120px){
+ .trinity-header .trinity-primary.desktop-nav.site-links{display:none}
+ .trinity-header .trinity-mobile-trigger.mobile-menu-trigger{display:inline-flex}
+ .trinity-header .trinity-mobile-panel.mobile-menu{display:grid}
+}
+@media(max-width:700px){
+ .trinity-header .trinity-inner.header-inner{min-height:62px;gap:7px;width:calc(100% - 24px)}
+ .trinity-header .trinity-brand.brand.khx-brand{gap:5px;font-size:16px}
+ .trinity-header .trinity-logo-wrap.brand-mark{width:34px;height:34px;flex-basis:34px;border-radius:10px}
+ .trinity-header .trinity-logo-wrap .kh-emblem{width:27px;height:27px}
+ .trinity-header .trinity-product-button{min-height:40px;padding:8px;font-size:11px;gap:4px}
+ .trinity-header .trinity-actions.header-actions{gap:5px}
+ .trinity-header :is(.trinity-icon-button,.trinity-mobile-trigger.mobile-menu-trigger){min-height:40px;width:40px;min-width:40px}
+ .trinity-header .trinity-cta.header-cta{display:none}
+}
+@media(max-width:410px){
+ .trinity-header .trinity-wordmark{font-size:0}
+ .trinity-header .trinity-product-button{padding-inline:6px}
+ .trinity-header .trinity-product-popover{left:-46px;width:min(274px,calc(100vw - 24px))}
+ .trinity-header .trinity-appearance-popover{right:-45px;width:min(290px,calc(100vw - 24px))}
+}
+@media(prefers-reduced-motion:reduce){
+ .trinity-header :is(*, *::before, *::after){animation:none!important;transition:none!important}
+}
+@keyframes trinity-appear{from{opacity:.35;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}

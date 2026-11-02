@@ -57,11 +57,11 @@ test.describe("KhanHomes Discover v0.7 Listing Atelier",()=>{
    await page.goto("/studio");
    const header=page.locator(".site-header");
    const brand=await header.locator(".brand").boundingBox();
-   const controls=await header.locator(".header-actions").boundingBox();
+   const controls=await header.locator(".trinity-actions").boundingBox();
    expect(brand&&controls&&brand.x+brand.width<=controls.x+2,"Header brand and actions overlap at "+width).toBeTruthy();
    if(width===1440){
      await expect(header.locator(".desktop-nav")).toBeVisible();
-     const nav=await header.locator(".desktop-nav").boundingBox();
+     const nav=await header.locator(".trinity-primary").boundingBox();
      expect(nav&&controls&&nav.x+nav.width<=controls.x+2,"Desktop Discover navigation and appearance controls overlap").toBeTruthy();
     }
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);

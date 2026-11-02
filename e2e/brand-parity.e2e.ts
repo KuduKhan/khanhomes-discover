@@ -13,6 +13,7 @@ test("Discover cross-product switcher preserves brand and fits mobile to desktop
   await page.goto("/");
   const nav=page.getByRole("navigation",{name:"KhanHomes product switcher"});
   await expect(nav).toBeVisible();
+  await nav.getByRole("button",{name:"Switch KhanHomes product"}).click();
   await expect(nav.getByRole("link",{name:"KhanHomes management"})).toHaveAttribute("href","https://khanhomes.vercel.app");
   await expect(nav.getByRole("link",{name:"KhanHomes Build"})).toHaveAttribute("href","https://khanhomes-build.vercel.app");
   await expect(nav.locator('[aria-current="page"]')).toHaveCount(1);
