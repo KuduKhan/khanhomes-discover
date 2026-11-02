@@ -1,0 +1,37 @@
+/* Discover: one app-local navigation with a single categorized tools menu.
+   The separate KhanHomes-family strip owns all cross-product links. */
+.site-header .header-inner{gap:clamp(9px,1.4vw,22px);min-height:70px}
+.kh-discover-primary{gap:clamp(11px,1.45vw,22px);min-width:0}
+.kh-discover-primary> a{font-size:12px}
+.kh-discover-tools{position:relative;flex:none}
+.kh-discover-tools summary{list-style:none;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap;font-size:12px;font-weight:750;color:var(--kh-muted-strong);padding-block:11px}
+.kh-discover-tools summary::-webkit-details-marker{display:none}
+.kh-discover-tools summary:hover,.kh-discover-tools[open] summary{color:var(--kh-strong)}
+.kh-discover-tools summary:focus-visible{outline:2px solid var(--kh-strong);outline-offset:4px;border-radius:4px}
+.kh-discover-tools-popover{position:absolute;right:0;top:calc(100% + 8px);min-width:194px;z-index:90;padding:7px;display:grid;gap:3px;border:1px solid var(--kh-line);background:var(--kh-paper);border-radius:14px;box-shadow:var(--kh-shadow)}
+.kh-discover-tools-popover a{display:flex;align-items:center;min-height:39px;padding:9px 12px;border-radius:9px;font-size:12px;white-space:nowrap;color:var(--kh-ink)}
+.kh-discover-tools-popover a:hover{background:var(--kh-soft);color:var(--kh-strong)}
+.site-header .header-actions{gap:clamp(5px,.75vw,10px);flex:none}
+.site-header .header-cta{font-size:12px;padding-inline:13px}
+.site-header .brand{flex:none}
+.site-header .atmosphere-picker{flex:none}
+/* Override legacy Finance Desk responsive rules that hid desktop navigation through 1480px. */
+@media(min-width:1121px){
+ .site-header .desktop-nav{display:flex}
+ .site-header .mobile-menu-trigger{display:none}
+}
+@media(max-width:1120px){
+ .site-header .desktop-nav{display:none}
+ .site-header .mobile-menu-trigger{display:grid}
+}
+@media(max-width:580px){
+ .site-header .header-inner{gap:7px}
+ .site-header .header-cta{display:none}
+ .site-header .brand-mark{width:39px;height:39px;flex-basis:39px}
+}
+@media(max-width:380px){
+ .site-header .brand-words{font-size:15px}
+ .site-header .brand{gap:5px}
+ .site-header .brand-mark{width:34px;height:34px;flex-basis:34px}
+}
+@media(prefers-reduced-motion:reduce){.kh-discover-tools-popover{transition:none}}

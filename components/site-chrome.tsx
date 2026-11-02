@@ -39,16 +39,19 @@ export function SiteHeader(){
  return <header className="site-header">
   <div className="wrap header-inner">
    <Brand/>
-   <nav className="desktop-nav" aria-label="Primary">
+   <nav className="desktop-nav kh-discover-primary" aria-label="Primary">
     <Link href="/#homes">Explore homes</Link>
     <Link href="/match">AURA Match</Link>
-    <Link href="/watch">Search watch</Link>
     <Link href="/visits">Visit plans</Link>
     <Link href="/planner">Notebook</Link>
-    <Link href="/studio">Listing Atelier</Link>
-    <Link href="/finance">Finance Desk</Link>
-    <Link href="/account"><UserRound size={15}/> My account</Link>
-    <a href={parentUrl+"/ecosystem"} target="_blank" rel="noopener noreferrer">KhanHomes ecosystem <ArrowUpRight size={14}/></a>
+    <details className="kh-discover-tools">
+      <summary aria-label="More Discover tools">More tools <span aria-hidden="true">⌄</span></summary>
+      <div className="kh-discover-tools-popover">
+        <Link href="/watch">Search watch</Link>
+        <Link href="/studio">Listing Atelier</Link>
+        <Link href="/finance">Finance Desk</Link>
+      </div>
+    </details>
    </nav>
    <div className="header-actions">
     <div className="atmosphere-picker" role="group" aria-label="Atmosphere Studio">
@@ -59,7 +62,7 @@ export function SiteHeader(){
     <button className="header-icon" type="button" onClick={()=>update(theme==="light"?"dark":"light",atmosphere)} title="Toggle light or dark mode" aria-label={theme==="dark"?"Switch to light mode":"Switch to dark mode"}>
      {theme==="dark"?<Sun size={18}/>:<Moon size={18}/>}
     </button>
-    <Link className="header-cta" href="/#homes"><Compass size={16}/> Discover <span>homes</span></Link>
+    <Link className="header-cta" href="/account"><UserRound size={16}/> My account</Link>
     <button ref={trigger} className="mobile-menu-trigger" aria-label={menuOpen?"Close navigation":"Open navigation"} aria-expanded={menuOpen} aria-controls="mobile-primary" onClick={()=>setMenuOpen(!menuOpen)} type="button">
      {menuOpen?<X size={20}/>:<Menu size={20}/>}
     </button>
@@ -75,8 +78,6 @@ export function SiteHeader(){
    <Link href="/studio" onClick={()=>setMenuOpen(false)}>Listing Atelier <Check size={17}/></Link>
    <Link href="/finance" onClick={()=>setMenuOpen(false)}>Finance Desk <Wallet size={17}/></Link>
    <Link href="/account" onClick={()=>setMenuOpen(false)}>My account <UserRound size={17}/></Link>
-   <a href={parentUrl+"/ecosystem"} rel="noopener noreferrer" onClick={()=>setMenuOpen(false)}>KhanHomes ecosystem <ArrowUpRight size={17}/></a>
-   <a href={buildUrl} onClick={()=>setMenuOpen(false)}>KhanHomes Build <ArrowUpRight size={17}/></a>
   </nav>}
  </header>;
 }
