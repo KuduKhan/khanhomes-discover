@@ -10,6 +10,7 @@ import "./finance-desk-v08.css";
 import "./footer-compact-v081.css";
 import "./khanhomes-brand-v1.css";
 import "./family-design.css";
+import "./header-refinement.css";
 export const metadata:Metadata={
  title:{default:"KhanHomes Discover — Find a place to belong",template:"%s | KhanHomes Discover"},
  description:"An elegantly connected way to discover rental homes and explore real-estate opportunities. Preview properties are illustrative, not live offers.",
