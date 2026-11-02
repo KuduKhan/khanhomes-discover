@@ -1,0 +1,25 @@
+/* KhanHomes family contract v1. Shared verbatim by independent products.
+   Visual tokens only: no authentication or shared client-side state. */
+:root{
+  --kh-family-navy:#06294a;--kh-family-gold:#bd8d16;
+  --kh-family-emerald:#147b69;--kh-family-canvas:#f6faf7;
+  --kh-family-border:#dbe9e2;--kh-family-ink:#173c40;
+  --kh-family-radius:16px;--kh-family-motion:cubic-bezier(.2,.75,.22,1);
+}
+.kh-family-strip{width:100%;max-width:100%;overflow:hidden;background:linear-gradient(105deg,#06294a,#0b3a51);border-bottom:1px solid #375268;isolation:isolate}
+.kh-family-strip-inner{width:min(1312px,calc(100% - 28px));margin-inline:auto;min-height:43px;display:flex;align-items:center;justify-content:flex-end;gap:clamp(5px,1.4vw,16px);min-width:0}
+.kh-family-strip-label{margin-right:auto;font-size:9px;font-weight:800;letter-spacing:.14em;white-space:nowrap;color:#d9c089}
+.kh-family-product{min-height:34px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:7px clamp(9px,1.3vw,15px);border:1px solid transparent;border-radius:10px;color:#e4eef1!important;font-size:11px;line-height:1.2;white-space:nowrap;text-decoration:none;font-weight:750;transition:background .18s var(--kh-family-motion),border-color .18s,transform .18s}
+.kh-family-product svg{flex:none}
+.kh-family-product:hover{color:#fff!important;background:rgba(255,255,255,.10);transform:translateY(-1px)}
+.kh-family-product[aria-current="page"]{background:rgba(255,255,255,.15);border-color:rgba(242,207,119,.45);color:#ffdf82!important;box-shadow:inset 0 -2px #d5a746}
+.kh-family-product:focus-visible{outline:2px solid #ffd979!important;outline-offset:2px}
+@media(max-width:520px){
+ .kh-family-strip-inner{justify-content:space-between;gap:4px;min-height:42px;width:calc(100% - 18px)}
+ .kh-family-strip-label{display:none}
+ .kh-family-product{flex:1 1 0;padding:8px 4px;gap:5px;font-size:10px;min-width:0}
+ .kh-family-product svg{width:14px;height:14px}
+}
+@media(max-width:355px){.kh-family-product{font-size:9.5px;gap:3px}}
+@media(prefers-reduced-motion:reduce){.kh-family-product{transition:none}.kh-family-product:hover{transform:none}}
+@media(prefers-contrast:more){.kh-family-product{border-color:#fff}.kh-family-product[aria-current="page"]{text-decoration:underline}}
