@@ -8,6 +8,7 @@ const atmospheres=[{id:"aurora",label:"Aurora",Icon:Waves},{id:"daybreak",label:
 type Atmosphere=(typeof atmospheres)[number]["id"];
 type Theme="light"|"dark";
 const parentUrl=process.env.NEXT_PUBLIC_KHANHOMES_URL||"https://khanhomes.vercel.app";
+const buildUrl=process.env.NEXT_PUBLIC_KHANHOMES_BUILD_URL?.startsWith("https://")?process.env.NEXT_PUBLIC_KHANHOMES_BUILD_URL.replace(/\/$/,""):parentUrl+"/build";
 export function SiteHeader(){
  const [theme,setTheme]=useState<Theme>("light");
  const [atmosphere,setAtmosphere]=useState<Atmosphere>("aurora");
@@ -45,7 +46,7 @@ export function SiteHeader(){
     <Link href="/studio">Listing Atelier</Link>
     <Link href="/finance">Finance Desk</Link>
     <Link href="/account"><UserRound size={15}/> My account</Link>
-    <a href={parentUrl} target="_blank" rel="noopener noreferrer">KhanHomes OS <ArrowUpRight size={14}/></a>
+    <a href={parentUrl+"/ecosystem"} target="_blank" rel="noopener noreferrer">KhanHomes ecosystem <ArrowUpRight size={14}/></a>
    </nav>
    <div className="header-actions">
     <div className="atmosphere-picker" role="group" aria-label="Atmosphere Studio">
@@ -71,7 +72,7 @@ export function SiteHeader(){
    <Link href="/studio" onClick={()=>setMenuOpen(false)}>Listing Atelier <Check size={17}/></Link>
    <Link href="/finance" onClick={()=>setMenuOpen(false)}>Finance Desk <Wallet size={17}/></Link>
    <Link href="/account" onClick={()=>setMenuOpen(false)}>My account <UserRound size={17}/></Link>
-   <a href={parentUrl} rel="noopener noreferrer" target="_blank" onClick={()=>setMenuOpen(false)}>KhanHomes OS <ArrowUpRight size={17}/></a>
+   <a href={parentUrl+"/ecosystem"} rel="noopener noreferrer" target="_blank" onClick={()=>setMenuOpen(false)}>KhanHomes ecosystem <ArrowUpRight size={17}/></a>
   </nav>}
  </header>;
 }
@@ -84,8 +85,8 @@ export function SiteFooter({mode}:{mode:"preview"|"live"}){
     <span className="footer-trust">{mode==="preview"?"Preview catalog · Fictional homes and indicative prices":"Published listing catalog · Check details before decisions"}</span>
    </div>
    <nav aria-label="Discover links" className="footer-links"><strong>Explore</strong><Link href="/#homes">Search homes</Link><Link href="/match">AURA Match</Link><Link href="/watch">Search watch</Link><Link href="/visits">Visit plans</Link><Link href="/planner">Home notebook</Link><Link href="/studio">Listing Atelier</Link><Link href="/finance">Finance Desk</Link><Link href="/#connection">Connected living</Link><Link href="/account">My Discover account</Link></nav>
-   <nav aria-label="KhanHomes links" className="footer-links"><strong>Connected to</strong><a target="_blank" rel="noopener noreferrer" href={parentUrl}>KhanHomes OS <ArrowUpRight size={14}/></a><Link href="/api/health">System status</Link><a href="https://github.com/KuduKhan/khanhomes-discover" target="_blank" rel="noopener noreferrer">Project source <ArrowUpRight size={14}/></a></nav>
+   <nav aria-label="KhanHomes links" className="footer-links"><strong>Connected to</strong><a target="_blank" rel="noopener noreferrer" href={parentUrl+"/ecosystem"}>KhanHomes ecosystem <ArrowUpRight size={14}/></a><a target="_blank" rel="noopener noreferrer" href={buildUrl}>KhanHomes Build <ArrowUpRight size={14}/></a><Link href="/api/health">System status</Link><a href="https://github.com/KuduKhan/khanhomes-discover" target="_blank" rel="noopener noreferrer">Project source <ArrowUpRight size={14}/></a></nav>
   </div>
-  <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} KhanHomes Discover</span><span>An independent KhanHomes experience · No payment collection or unapproved listings</span></div>
+  <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} KhanHomes Discover</span><span>Part of the KhanHomes ecosystem · No payment collection or unapproved listings</span></div>
  </footer>;
 }
