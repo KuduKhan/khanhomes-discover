@@ -6,10 +6,7 @@ import {type Listing,formatKes} from "@/lib/catalog";
 import {assessmentCompletion,exportSafePlanner,HUNT_CHECKLIST,HUNT_PLANNER_KEY,initialAssessment,safeAssessments,type CheckId,type HomeAssessment} from "@/lib/hunt-planner";
 import {PropertyPhoto} from "@/components/property-card";
 import {mergePlannerImport,parsePlannerImport} from "@/lib/planner-portability";
-const FAV_KEY="kh-discovery-saved-v1";
-function storedIds(raw:string|null):string[]{
- try{const x=JSON.parse(raw??"[]") as unknown;return Array.isArray(x)?x.filter((y):y is string=>typeof y==="string").slice(0,100):[];}catch{return [];}
-}
+import {DISCOVER_FAVORITES_KEY,normalizeFavoriteIds,readStoredList} from "@/lib/local-preferences";
 export function HuntPlannerBoard({listings,mode}:{listings:Listing[];mode:"preview"|"live"}){
  const [ready,setReady]=useState(false);
  const [saved,setSaved]=useState<string[]>([]);
@@ -18,12 +15,23 @@ export function HuntPlannerBoard({listings,mode}:{listings:Listing[];mode:"previ
  const [status,setStatus]=useState("");
  const importInput=useRef<HTMLInputElement>(null);
  useEffect(()=>{
-  try{
-   setSaved(storedIds(localStorage.getItem(FAV_KEY)));
-   const raw=localStorage.getItem(HUNT_PLANNER_KEY);
-   setAssessments(safeAssessments(raw?JSON.parse(raw):[]));
-  }catch{}
-  setReady(true);
+  const syncFavorites=()=>{
+   try{setSaved(readStoredList(localStorage.getItem(DISCOVER_FAVORITES_KEY),normalizeFavoriteIds));}
+   catch{setSaved([]);}
+  };
+  const syncNotes=()=>{
+   try{setAssessments(readStoredList(localStorage.getItem(HUNT_PLANNER_KEY),safeAssessments));}
+   catch{setAssessments([]);}
+  };
+  syncFavorites();syncNotes();setReady(true);
+  const onStorage=(event:StorageEvent)=>{
+   if(event.key===DISCOVER_FAVORITES_KEY||event.key===null)syncFavorites();
+   if(event.key===HUNT_PLANNER_KEY||event.key===null){
+    syncNotes();setStatus("Notebook updated from another tab.");
+   }
+  };
+  window.addEventListener("storage",onStorage);
+  return()=>window.removeEventListener("storage",onStorage);
  },[]);
  const available=useMemo(()=>listings.filter(x=>saved.includes(x.id)),[listings,saved]);
  const active=available.find(x=>x.id===selected)??available[0];
