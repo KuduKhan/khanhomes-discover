@@ -15,7 +15,20 @@ export function VisitPlanner({listings,mode}:Props){
  const [feedback,setFeedback]=useState("");
  const byId=useMemo(()=>new Map(listings.map(x=>[x.id,x])),[listings]);
  const upcoming=useMemo(()=>visits.filter(x=>byId.has(x.listingId)).sort((a,b)=>(a.day+"T"+a.time).localeCompare(b.day+"T"+b.time)),[visits,byId]);
- useEffect(()=>{try{setVisits(normalizeTentativeVisits(JSON.parse(localStorage.getItem(TENTATIVE_VISITS_KEY)??"[]")));}catch{}setReady(true);},[]);
+ useEffect(()=>{
+  const synchronize=()=>{
+   try{setVisits(normalizeTentativeVisits(JSON.parse(localStorage.getItem(TENTATIVE_VISITS_KEY)??"[]")));}
+   catch{setVisits([]);}
+  };
+  synchronize();setReady(true);
+  const onStorage=(event:StorageEvent)=>{
+   if(event.key===TENTATIVE_VISITS_KEY||event.key===null){
+    synchronize();setFeedback("Tentative visit plans refreshed from another tab.");
+   }
+  };
+  window.addEventListener("storage",onStorage);
+  return()=>window.removeEventListener("storage",onStorage);
+ },[]);
  const persist=(next:TentativeVisit[])=>{
   setVisits(next);
   try{localStorage.setItem(TENTATIVE_VISITS_KEY,JSON.stringify(next));setFeedback("Personal itinerary saved on this device.");}
@@ -27,7 +40,12 @@ export function VisitPlanner({listings,mode}:Props){
   if(visits.length>=30){setFeedback("Maximum 30 personal visit ideas.");return;}
   const item={id:crypto.randomUUID(),listingId,day,time,note:note.trim().slice(0,240)};
   if(normalizeTentativeVisits([item]).length===0){setFeedback("Select a valid date and time.");return;}
+  if(visits.some(v=>v.listingId===item.listingId&&v.day===item.day&&v.time===item.time)){
+   setFeedback("That home already has a tentative visit at the selected time. Edit the plan or choose another time.");return;
+  }
+  const overlaps=visits.some(v=>hasVisitClash(item,v));
   persist([...visits,item]);setNote("");
+  if(overlaps)setFeedback("Visit idea saved with a schedule overlap. Adjust the times before exporting your tentative calendar.");
  };
  const download=()=>{
   if(!upcoming.length)return;
