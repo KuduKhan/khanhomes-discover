@@ -39,11 +39,11 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
   return()=>window.removeEventListener("storage",onStorage);
  },[]);
  const save=(id:string)=>{
-  setSaved(old=>{
-   const next=normalizeFavoriteIds(old.includes(id)?old.filter(x=>x!==id):[...old,id]);
-   try{localStorage.setItem(DISCOVER_FAVORITES_KEY,JSON.stringify(next));}catch{}
-   return next;
-  });
+  // Write on the user action, not inside React's state updater: updater functions
+  // may be deferred or replayed, and other tabs need a deterministic storage event.
+  const next=normalizeFavoriteIds(saved.includes(id)?saved.filter(x=>x!==id):[...saved,id]);
+  setSaved(next);
+  try{localStorage.setItem(DISCOVER_FAVORITES_KEY,JSON.stringify(next));}catch{}
  };
  const compare=(id:string)=>{
   setCompared(old=>{
