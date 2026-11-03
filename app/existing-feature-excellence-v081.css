@@ -1,0 +1,79 @@
+/* Discover v0.8.1 — existing-feature finish, no new workflow surfaces.
+   AURA palette and light/dark/system tokens remain the sole color source.
+   This file deliberately does not override the shared Trinity header. */
+.discovery-site :is(.match-page,.watch-page,.visit-page,.planner-page,.finance-page,.atelier-page,.account-page){
+ min-width:0;
+}
+.discovery-site :is(.match-layout,.visit-layout,.planner-layout,.atelier-layout,.finance-layout,.account-layout){
+ min-width:0;align-items:start;
+}
+.discovery-site :is(.match-controls,.match-results,.visit-editor,.visit-plan,.planner-sidebar,.planner-board,.atelier-sidebar,.atelier-main,.finance-controls,.finance-results,.account-panel,.watch-entry){
+ min-width:0;max-width:100%;
+}
+.discovery-site :is(.match-controls,.visit-editor,.planner-sidebar,.atelier-sidebar,.finance-controls,.account-panel){
+ border-color:var(--kh-line);background:var(--kh-paper);
+ box-shadow:var(--kh-shadow);
+}
+.discovery-site :is(.match-controls,.visit-editor,.planner-sidebar,.atelier-sidebar,.finance-controls,.account-panel) :is(input,select,textarea){
+ min-width:0;max-width:100%;color:var(--kh-ink);
+}
+.discovery-site :is(.match-controls,.visit-editor,.planner-sidebar,.atelier-sidebar,.finance-controls,.account-panel) :is(button,select,input){
+ min-height:42px;
+}
+.discovery-site :is(.match-page,.visit-page,.planner-page,.finance-page,.atelier-page,.account-page) :is(h1,h2,h3){
+ overflow-wrap:break-word;
+}
+.discovery-site :is(.watch-entry,.visit-row,.planner-home-tab,.atelier-draft-tab,.match-result,.finance-stat-grid article){
+ overflow-wrap:anywhere;
+}
+.discovery-site :is(.match-field,.finance-field,.visit-fields label,.planner-layout,.atelier-layout,.finance-layout)>*{
+ min-width:0;
+}
+.discovery-site :is(.watchboard,.match-studio,.visit-planner,.planner-wrap,.atelier,.finance-desk){
+ min-width:0;
+}
+.discovery-site :is(.watchboard,.match-studio,.visit-planner,.planner-wrap,.atelier,.finance-desk) :is(button,a,input,select,textarea):focus-visible{
+ outline:3px solid var(--kh-strong);outline-offset:3px;
+}
+.discovery-site :is(.watchboard,.match-studio,.visit-planner,.planner-wrap,.atelier,.finance-desk) :is(button,a){
+ transition-duration:.18s;
+}
+.finance-share-unavailable{
+ padding:12px 14px;background:var(--kh-soft);color:var(--kh-muted-strong);
+ border:1px solid var(--kh-line);border-radius:11px;
+ font-size:12px;line-height:1.6;
+}
+@media(max-width:780px){
+ .discovery-site :is(.match-layout,.visit-layout,.planner-layout,.atelier-layout,.finance-layout,.account-layout){
+  grid-template-columns:minmax(0,1fr);
+ }
+ .discovery-site :is(.match-intro,.visit-intro,.watch-heading,.atelier-heading,.finance-intro){
+  flex-wrap:wrap;align-items:start;
+ }
+ .discovery-site :is(.match-notice,.visit-mode,.atelier-studio-label,.finance-preview){
+  flex:0 1 auto;max-width:100%;
+ }
+}
+@media(max-width:520px){
+ .discovery-site :is(.match-page,.watch-page,.visit-page,.planner-page,.finance-page,.atelier-page) {
+  padding-block:22px 48px;
+ }
+ .discovery-site :is(.match-controls,.visit-editor,.planner-sidebar,.atelier-sidebar,.finance-controls,.account-panel){
+  padding:clamp(14px,4vw,20px);
+  border-radius:17px;
+ }
+ .discovery-site :is(.match-control-grid,.finance-fields,.visit-fields,.atelier-form-grid) {
+  grid-template-columns:minmax(0,1fr);
+ }
+ .discovery-site :is(.watch-entry-heading,.watch-entry-status,.visit-row-top,.finance-panel-heading){
+  flex-wrap:wrap;
+ }
+ .discovery-site :is(.watch-entry-actions,.visit-row-top) button {
+  min-height:44px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .discovery-site :is(.watchboard,.match-studio,.visit-planner,.planner-wrap,.atelier,.finance-desk) :is(button,a){
+  animation:none!important;transition:none!important;
+ }
+}
