@@ -14,11 +14,21 @@ export function SearchWatchboard({listings,mode}:Props){
  const [feedback,setFeedback]=useState("");
  const counties=useMemo(()=>["All locations",...new Set(listings.map(x=>x.county))],[listings]);
  useEffect(()=>{
-  try{
-   setSearches(normalizeSavedSearches(JSON.parse(localStorage.getItem(SEARCHES_KEY)??"[]")));
-   setWatches(normalizeWatchSnapshots(JSON.parse(localStorage.getItem(WATCH_KEY)??"[]")));
-  }catch{}
-  setReady(true);
+  const syncSearches=()=>{
+   try{setSearches(normalizeSavedSearches(JSON.parse(localStorage.getItem(SEARCHES_KEY)??"[]")));}
+   catch{setSearches([]);}
+  };
+  const syncWatches=()=>{
+   try{setWatches(normalizeWatchSnapshots(JSON.parse(localStorage.getItem(WATCH_KEY)??"[]")));}
+   catch{setWatches([]);}
+  };
+  syncSearches();syncWatches();setReady(true);
+  const onStorage=(event:StorageEvent)=>{
+   if(event.key===SEARCHES_KEY||event.key===null)syncSearches();
+   if(event.key===WATCH_KEY||event.key===null)syncWatches();
+  };
+  window.addEventListener("storage",onStorage);
+  return()=>window.removeEventListener("storage",onStorage);
  },[]);
  const check=(entry:SavedSearch)=>{
   const next=checkSavedSearch(entry,watches,listings,counties);
@@ -30,7 +40,8 @@ export function SearchWatchboard({listings,mode}:Props){
   const next=searches.filter(x=>x.id!==entry.id),watched=watches.filter(x=>x.searchId!==entry.id);
   setSearches(next);setWatches(watched);
   try{localStorage.setItem(SEARCHES_KEY,JSON.stringify(next));localStorage.setItem(WATCH_KEY,JSON.stringify(watched));}
-  catch{setFeedback("Browser storage unavailable; deletion cannot be persisted.");}
+  catch{setFeedback("Browser storage unavailable; deletion cannot be persisted.");return;}
+  setFeedback("Saved search removed from this device.");
  };
  return <section className="watchboard">
   <div className="watch-heading">
