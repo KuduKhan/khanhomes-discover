@@ -6,7 +6,7 @@ test.describe("Discover existing-feature excellence v0.8.1",()=>{
   const notebook=await context.newPage();
   await notebook.goto("/planner");
   await expect(notebook.locator(".planner-home-tab")).toHaveCount(0);
-  await page.getByRole("button",{name:/^Save /}).first().click();
+  await page.locator(".property-card .save-btn").first().click();
   await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem("kh-discovery-saved-v1")??"[]").length))
    .toBe(1);
   await expect(notebook.locator(".planner-home-tab")).toHaveCount(1);
