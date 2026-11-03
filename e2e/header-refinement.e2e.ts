@@ -5,9 +5,10 @@ test("Discover Trinity v2 has a single integrated header with accessible local a
  await expect(nav.getByRole("link",{name:"Explore homes"})).toBeVisible();
  await nav.getByRole("button",{name:/More/}).click();
  await expect(nav.getByRole("link",{name:"Finance Desk"})).toBeVisible();
- const switcher=page.getByRole("navigation",{name:"KhanHomes product switcher"});
- await switcher.getByRole("button",{name:"Switch KhanHomes product"}).click();
- await expect(switcher.getByRole("link",{name:"KhanHomes Build"})).toHaveAttribute("href","https://khanhomes-build.vercel.app");
+ const products=page.getByRole("navigation",{name:"KhanHomes products",exact:true});
+ await expect(products).toBeVisible();
+ await expect(products.getByRole("link",{name:"Discover",exact:true})).toHaveAttribute("aria-current","page");
+ await expect(products.getByRole("link",{name:"Build",exact:true})).toHaveAttribute("href","https://khanhomes-build.vercel.app");
  await expect(page.getByRole("link",{name:"My account"}).first()).toHaveAttribute("href","/account");
  await expect(page.locator(".kh-family-strip")).toHaveCount(0);
 });

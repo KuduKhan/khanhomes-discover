@@ -13,14 +13,28 @@ export function DiscoverTools({filters,onFiltersChange,counties}:{filters:Filter
  const [newLabel,setNewLabel]=useState("");
  const [saveOpen,setSaveOpen]=useState(false);
  useEffect(()=>{
-  try{
-   const stored=localStorage.getItem(SEARCHES_KEY);
-   setSavedSearches(normalizeSavedSearches(stored?JSON.parse(stored):[]));
-  }catch{}
-  const params=new URLSearchParams(window.location.search);
-  if(params.toString())onFiltersChange(parseFilters(params,counties));
- // hydrate only once; filter controls must not be overwritten on every render
- // eslint-disable-next-line react-hooks/exhaustive-deps
+  const synchronize=()=>{
+   try{setSavedSearches(normalizeSavedSearches(JSON.parse(localStorage.getItem(SEARCHES_KEY)??"[]")));}
+   catch{setSavedSearches([]);}
+  };
+  const restoreFromUrl=()=>{
+   const params=new URLSearchParams(window.location.search);
+   onFiltersChange(parseFilters(params,counties));
+  };
+  synchronize();
+  // Initial deep links and browser Back/Forward must restore exactly the same filter set.
+  if(window.location.search)restoreFromUrl();
+  const onStorage=(event:StorageEvent)=>{
+   if(event.key===SEARCHES_KEY||event.key===null)synchronize();
+  };
+  window.addEventListener("storage",onStorage);
+  window.addEventListener("popstate",restoreFromUrl);
+  return()=>{
+   window.removeEventListener("storage",onStorage);
+   window.removeEventListener("popstate",restoreFromUrl);
+  };
+  // Initial hydration binds to the first catalog; changes to filters must not reset them.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
  },[]);
  const run=()=>{
   if(!prompt.trim()){setFeedback("Describe the location, budget or features you want.");return;}

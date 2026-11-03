@@ -24,11 +24,22 @@ export function MatchStudio({listings,mode}:Props){
  const [feedback,setFeedback]=useState("");
  const [expanded,setExpanded]=useState<string|null>(null);
  useEffect(()=>{
-  try{
-   const raw=localStorage.getItem(MATCH_STORAGE_KEY);
-   if(raw)setPreferences(normalizeMatchPreferences(JSON.parse(raw),counties));
-  }catch{}
-  setReady(true);
+  const syncPreferences=()=>{
+   try{
+    const raw=localStorage.getItem(MATCH_STORAGE_KEY);
+    setPreferences(normalizeMatchPreferences(raw?JSON.parse(raw):null,counties));
+   }catch{
+    setPreferences(normalizeMatchPreferences(null,counties));
+   }
+  };
+  syncPreferences();setReady(true);
+  const onStorage=(event:StorageEvent)=>{
+   if(event.key===MATCH_STORAGE_KEY||event.key===null){
+    syncPreferences();setFeedback("Matching preferences refreshed from another tab.");
+   }
+  };
+  window.addEventListener("storage",onStorage);
+  return()=>window.removeEventListener("storage",onStorage);
  },[counties]);
  const update=(change:Partial<MatchPreferences>)=>{
   setPreferences(old=>{

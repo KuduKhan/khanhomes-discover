@@ -14,11 +14,23 @@ export function ListingAtelier(){
  const [feedback,setFeedback]=useState("");
  const [error,setError]=useState("");
  useEffect(()=>{
-  try{
-   const saved=normalizeDrafts(JSON.parse(localStorage.getItem(LISTING_DRAFT_KEY)??"[]"));
-   setDrafts(saved);setCurrentId(saved[0]?.id??"");
-  }catch{}
-  setReady(true);
+  const synchronize=()=>{
+   try{
+    const saved=normalizeDrafts(JSON.parse(localStorage.getItem(LISTING_DRAFT_KEY)??"[]"));
+    setDrafts(saved);
+    setCurrentId(current=>saved.some(x=>x.id===current)?current:saved[0]?.id??"");
+   }catch{
+    setDrafts([]);setCurrentId("");
+   }
+  };
+  synchronize();setReady(true);
+  const onStorage=(event:StorageEvent)=>{
+   if(event.key===LISTING_DRAFT_KEY||event.key===null){
+    synchronize();setFeedback("Local listing drafts refreshed from another tab.");
+   }
+  };
+  window.addEventListener("storage",onStorage);
+  return()=>window.removeEventListener("storage",onStorage);
  },[]);
  const draft=useMemo(()=>drafts.find(x=>x.id===currentId),[drafts,currentId]);
  const progress=draft?evaluateDraft(draft):null;

@@ -12,12 +12,10 @@ import {DiscoverTools} from "@/components/discover-tools";
 import {AreaAtlas} from "@/components/area-atlas";
 import {PropertyCard,PropertyPhoto} from "@/components/property-card";
 import {SiteHeader,SiteFooter} from "@/components/site-chrome";
+import {DISCOVER_FAVORITES_KEY,normalizeFavoriteIds,readStoredList} from "@/lib/local-preferences";
 
 const parentUrl=process.env.NEXT_PUBLIC_KHANHOMES_URL||"https://khanhomes.vercel.app";
 type Catalog={mode:"preview"|"live";listings:Listing[]};
-const safeStorage=(raw:string|null):string[]=>{
- try{const v=JSON.parse(raw??"[]") as unknown;return Array.isArray(v)?v.filter((x):x is string=>typeof x==="string").slice(0,100):[];}catch{return [];}
-};
 export function DiscoveryExperience({catalog}:{catalog:Catalog}){
  const [filters,setFilters]=useState<Filters>(DEFAULT_FILTERS);
  const [saved,setSaved]=useState<string[]>([]);
@@ -28,13 +26,24 @@ export function DiscoveryExperience({catalog}:{catalog:Catalog}){
  const [view,setView]=useState<"grid"|"list"|"map">("grid");
  const [compareWarning,setCompareWarning]=useState("");
  const resultsRef=useRef<HTMLElement>(null);
- useEffect(()=>{try{setSaved(safeStorage(localStorage.getItem("kh-discovery-saved-v1")));}catch{}},[]);
+ useEffect(()=>{
+  const synchronize=()=>{
+   try{setSaved(readStoredList(localStorage.getItem(DISCOVER_FAVORITES_KEY),normalizeFavoriteIds));}
+   catch{setSaved([]);}
+  };
+  synchronize();
+  const onStorage=(event:StorageEvent)=>{
+   if(event.key===DISCOVER_FAVORITES_KEY||event.key===null)synchronize();
+  };
+  window.addEventListener("storage",onStorage);
+  return()=>window.removeEventListener("storage",onStorage);
+ },[]);
  const save=(id:string)=>{
-  setSaved(old=>{
-   const next=old.includes(id)?old.filter(x=>x!==id):[...old,id];
-   try{localStorage.setItem("kh-discovery-saved-v1",JSON.stringify(next));}catch{}
-   return next;
-  });
+  // Write on the user action, not inside React's state updater: updater functions
+  // may be deferred or replayed, and other tabs need a deterministic storage event.
+  const next=normalizeFavoriteIds(saved.includes(id)?saved.filter(x=>x!==id):[...saved,id]);
+  setSaved(next);
+  try{localStorage.setItem(DISCOVER_FAVORITES_KEY,JSON.stringify(next));}catch{}
  };
  const compare=(id:string)=>{
   setCompared(old=>{
