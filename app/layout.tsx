@@ -13,6 +13,7 @@ import "./family-design.css";
 import "./header-refinement.css";
 import "./trinity-header.css";
 import "./existing-feature-excellence-v081.css";
+import "./trinity-responsive-finish.css";
 export const metadata:Metadata={
  title:{default:"KhanHomes Discover — Find a place to belong",template:"%s | KhanHomes Discover"},
  description:"An elegantly connected way to discover rental homes and explore real-estate opportunities. Preview properties are illustrative, not live offers.",
