@@ -165,3 +165,87 @@
 @media(max-width:1120px){.trinity-header .trinity-product-tabs{display:none}}
 @media(max-width:420px){.trinity-header .trinity-brand-tagline{font-size:7px;letter-spacing:.10em}}
 @media(prefers-reduced-motion:reduce){.trinity-header *, .trinity-header *::before,.trinity-header *::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Prevent the small-screen brand lockup from displacing the mobile menu trigger.
+   The logo remains visible and the accessible brand label remains on its link. */
+@media(max-width:440px){
+ .trinity-header .trinity-brand-tagline{display:none}
+ .trinity-header .trinity-inner.header-inner{gap:6px}
+}
+@media(max-width:410px){
+ .trinity-header .trinity-brand-copy{display:none}
+ .trinity-header .trinity-brand.brand.khx-brand{gap:0}
+}
+
+
+/* Higher specificity than legacy ".khx-top nav a:last-child" CTA rule.
+   Product tabs must remain one neutral segmented control, not a second CTA. */
+.kb-public .trinity-header .trinity-product-tabs>a:last-child{
+ background:transparent;color:var(--trinity-muted);
+}
+.kb-public .trinity-header .trinity-product-tabs>a[aria-current="page"]{
+ background:var(--trinity-surface);color:var(--trinity-accent);
+}
+
+/* TRINITY BRAND FIT v2.1 — preserve the full emblem and the active product slogan.
+   The two-row compact header prevents text hiding/cropping on 320px phones. */
+.trinity-header .trinity-logo-wrap.brand-mark{
+ box-sizing:border-box;width:43px;height:43px;flex:0 0 43px;
+ padding:4px;overflow:visible;border-radius:13px;
+}
+.trinity-header .trinity-logo-wrap .kh-emblem{
+ box-sizing:border-box;display:block;width:100%;height:100%;
+ min-width:0;max-width:100%;max-height:100%;
+ object-fit:contain;object-position:center;
+}
+.trinity-header .trinity-brand.brand.khx-brand{min-width:0}
+.trinity-header .trinity-brand-copy{min-width:0;max-width:100%}
+.trinity-header .trinity-brand-tagline{
+ display:block;max-width:100%;font-size:8px;letter-spacing:.115em;
+ line-height:1.3;white-space:nowrap;
+}
+@media(max-width:700px){
+ .trinity-header .trinity-logo-wrap.brand-mark{
+  box-sizing:border-box;width:37px;height:37px;flex-basis:37px;padding:3px;
+ }
+ .trinity-header .trinity-logo-wrap .kh-emblem{width:100%;height:100%;max-height:100%;object-fit:contain}
+}
+@media(max-width:520px){
+ .trinity-header .trinity-inner.header-inner{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  grid-template-areas:"trinity-brand trinity-actions" "trinity-switch trinity-switch";
+  align-items:center;column-gap:9px;row-gap:7px;
+  min-height:0;padding-block:8px;width:calc(100% - 24px);
+ }
+ .trinity-header .trinity-brand.brand.khx-brand{
+  grid-area:trinity-brand;justify-self:start;min-width:0;gap:8px;
+  white-space:normal;font-size:17px;
+ }
+ .trinity-header .trinity-brand-copy{
+  display:flex!important;flex-direction:column;align-items:flex-start;
+  min-width:0;max-width:100%;gap:2px;
+ }
+ .trinity-header .trinity-wordmark{
+  font-size:17px!important;line-height:1.12;white-space:nowrap;
+ }
+ .trinity-header .trinity-brand-tagline{
+  display:block!important;font-size:8px!important;
+  line-height:1.3;letter-spacing:.065em;white-space:normal;
+  overflow-wrap:break-word;
+ }
+ .trinity-header .trinity-actions.header-actions{grid-area:trinity-actions;justify-self:end}
+ .trinity-header .trinity-product-nav{
+  grid-area:trinity-switch;display:flex;justify-self:start;
+  width:max-content;max-width:100%;min-width:0;
+ }
+ .trinity-header .trinity-product-button{
+  min-height:38px;padding:7px 11px;font-size:11px;
+ }
+ .trinity-header .trinity-primary.desktop-nav.site-links{display:none}
+ .trinity-header .trinity-product-tabs{display:none}
+}
+@media(max-width:360px){
+ .trinity-header .trinity-inner.header-inner{column-gap:5px}
+ .trinity-header .trinity-wordmark{font-size:16px!important}
+ .trinity-header .trinity-brand-tagline{font-size:7.5px!important;letter-spacing:.025em}
+}
