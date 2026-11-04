@@ -52,3 +52,39 @@ test("Discover mobile search and existing property browsing remain reachable",as
  await expect(page.locator(".hero-search input")).toBeVisible();
  await expect(page.locator(".property-grid").first()).toBeVisible();
 });
+
+test("Trinity handset header keeps brand, controls and product switcher in clear rows",async({page})=>{
+ for(const width of [320,375,428]){
+  await page.setViewportSize({width,height:740});
+  await page.goto("/",{waitUntil:"domcontentloaded"});
+  const fit=await page.evaluate(()=>{
+   const header=document.querySelector('header[data-trinity-product]');
+   const brand=header?.querySelector(".trinity-brand");
+   const actions=header?.querySelector(".trinity-actions");
+   const switcher=header?.querySelector(".trinity-product-nav");
+   const slogan=header?.querySelector(".trinity-brand-tagline");
+   const emblem=header?.querySelector(".kh-emblem");
+   const controls=header?.querySelectorAll(".trinity-product-button,.trinity-icon-button,.trinity-mobile-trigger")??[];
+   if(!brand||!actions||!switcher||!slogan||!emblem)return null;
+   const rect=(el:Element)=>{
+    const r=el.getBoundingClientRect();
+    return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};
+   };
+   return {
+    viewport:document.documentElement.clientWidth,
+    rootWidth:document.documentElement.scrollWidth,
+    brand:rect(brand),actions:rect(actions),switcher:rect(switcher),
+    slogan:rect(slogan),emblem:rect(emblem),
+    controlHeights:Array.from(controls).filter(el=>getComputedStyle(el).display!=="none").map(el=>rect(el).height)
+   };
+  });
+  expect(fit,"Trinity header elements are present").not.toBeNull();
+  if(!fit)continue;
+  expect(fit.rootWidth,"Document width at "+width).toBeLessThanOrEqual(fit.viewport+2);
+  expect(fit.brand.right,"Brand must not cover actions at "+width).toBeLessThanOrEqual(fit.actions.left+1);
+  expect(fit.switcher.top,"Product switcher must sit below header row").toBeGreaterThanOrEqual(Math.min(fit.brand.bottom,fit.actions.bottom)-1);
+  expect(fit.slogan.height,"Slogan stays visible").toBeGreaterThan(0);
+  expect(fit.emblem.width,"Emblem is not cropped to zero width").toBeGreaterThan(20);
+  for(const height of fit.controlHeights)expect(height,"Touch target height").toBeGreaterThanOrEqual(40);
+ }
+});

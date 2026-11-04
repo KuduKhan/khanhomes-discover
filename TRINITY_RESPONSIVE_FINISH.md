@@ -1,4 +1,4 @@
-# KhanHomes Trinity — Premium Responsive Finish v2.2
+# KhanHomes Trinity — Premium Responsive Finish v2.3
 
 ## Purpose
 Refine existing KhanHomes, Discover and Build pages. Do not add modules, navigation links,
@@ -35,3 +35,14 @@ reduced-transparency preferences remain respected.
    browser UX is verified merely from the Vercel READY state.
 5. Keep KhanHomes Build commercial features gated (`KHANHOMES_BUILD_V05_ENABLED=false`);
    do not modify auth/RLS, database schemas or billing.
+
+## v2.3 acceptance refinements
+- Shared mobile header touch targets and non-overlapping brand, controls and product switcher at 320, 375 and 428px; the active product slogan remains visible.
+- Responsive grid children and long record names are contained without hiding data behind page-wide clipping.
+- KhanHomes management: tighter phone typography and in-panel overflow treatment for existing analytics and tables.
+- Discover: the existing hero search stacks its submit button beneath the input at very narrow widths, retaining the same search behavior.
+- Build: project selector, sidebar, cards and cost previews stay accessible at handset widths; the authenticated Build command page uses a concise operational overview rather than a promotional hero.
+- The public Build demo and private Build workspace remain separate, with no auth, RLS, billing, payroll, feature-gate or schema changes.
+
+## Verification before release
+The new handset-header geometry assertions complement the existing 320–1440px Playwright checks. Type checking, unit tests, strict linting, production builds and mobile/desktop Playwright must all pass on each PR. Visual acceptance also requires live device/viewport inspection; merged SHA and Vercel READY alone are not sufficient.

@@ -292,3 +292,131 @@
  .trinity-header.site-header.khx-top,
  .trinity-dashboard .td-topbar{backdrop-filter:none;-webkit-backdrop-filter:none}
 }
+
+/* TRINITY PREMIUM FIT v2.3 — constrained improvements to existing product UI.
+   Shared verbatim across management, Discover and Build. No new functionality. */
+
+/* Maintain legible controls, clean focus and full-width geometry without clipping. */
+.trinity-header :is(.trinity-product-button,.trinity-icon-button,.trinity-mobile-trigger){
+ min-height:44px;
+}
+.trinity-header :is(.trinity-popover,.trinity-mobile-panel){
+ box-sizing:border-box;max-width:calc(100vw - 24px);
+}
+.trinity-header .trinity-brand-copy,
+.trinity-header .trinity-brand-tagline{
+ min-width:0;overflow-wrap:break-word;
+}
+.app-shell :is(.stat-grid,.analytics-grid,.form-grid)>*,
+.discovery-site :is(.property-grid,.hero-layout,.match-layout,.visit-layout,.planner-layout,.finance-layout)>*,
+.trinity-dashboard :is(.demo-metrics,.demo-two-column,.demo-cost-grid,.demo-project-grid,.demo-record-grid)>*{
+ min-width:0;max-width:100%;
+}
+.app-shell :is(.stat-card,.panel,.table-panel,.chart-panel),
+.discovery-site :is(.property-card,.listing-panel,.account-panel),
+.trinity-dashboard :is(.demo-card,.demo-metric,.kh-build-panel,.kh-build-metric){
+ box-sizing:border-box;
+}
+.app-shell :is(.table-scroll,.table-responsive),
+.discovery-site :is(.compare-table-scroll,.table-responsive),
+.trinity-dashboard :is(.table-scroll,.demo-table-scroll,.kh-table-scroll){
+ max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;
+ -webkit-overflow-scrolling:touch;
+}
+.trinity-dashboard :is(.td-brand-mark,.td-brand-mark img){
+ object-fit:contain;object-position:center;
+}
+.trinity-dashboard :is(.td-topbar,.td-content,.td-footer){
+ box-sizing:border-box;
+}
+.trinity-dashboard :is(.demo-list-row,.demo-entry,.demo-record,.demo-forecast,.demo-project-card)>*{
+ min-width:0;max-width:100%;
+}
+.trinity-dashboard :is(.demo-list-row,.demo-entry,.demo-record,.demo-forecast)
+ :is(strong,small,p,span){
+ overflow-wrap:anywhere;
+}
+
+/* Tablet remains intentionally two-column only where the available space fits. */
+@media (max-width:960px){
+ .app-shell .app-content,
+ .kh-live-shell .kh-live-content,
+ .trinity-dashboard .td-content{
+  min-width:0;max-width:100%;
+ }
+ .trinity-dashboard :is(.demo-project-grid,.demo-record-grid){
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));
+ }
+}
+
+/* Phones: preserve slogan and actions, reduce accidental zoom, avoid input overflow. */
+@media (max-width:580px){
+ .trinity-header .trinity-inner.header-inner{
+  min-width:0;max-width:calc(100% - 24px);
+ }
+ .trinity-header .trinity-brand.brand.khx-brand{min-width:0}
+ .trinity-header .trinity-brand-tagline{
+  display:block!important;max-width:100%;line-height:1.35;white-space:normal;
+ }
+ .app-shell .app-content,
+ .kh-live-shell .kh-live-content{
+  min-width:0;max-width:100%;
+ }
+ .app-shell :is(input,select,textarea),
+ .discovery-site :is(input,select,textarea),
+ .trinity-dashboard :is(input,select,textarea){
+  max-width:100%;min-width:0;font-size:16px;
+ }
+ .app-shell .page-heading :is(h1,h2),
+ .discovery-site .section-heading :is(h1,h2),
+ .trinity-dashboard .td-page-heading h1{
+  overflow-wrap:break-word;text-wrap:balance;
+ }
+ .trinity-dashboard .td-topbar>.td-topbar-inner{width:100%;min-width:0}
+ .trinity-dashboard .td-top-actions{
+  width:100%;min-width:0;justify-content:flex-start;
+ }
+ .trinity-dashboard .td-content{
+  padding-inline:clamp(12px,3vw,18px);
+ }
+ .trinity-dashboard .td-project-control select{
+  max-width:100%;width:100%;min-width:0;
+ }
+ .trinity-dashboard .demo-card-title,
+ .trinity-dashboard .demo-workarea-head{
+  min-width:0;max-width:100%;gap:10px;
+ }
+}
+
+/* Smallest supported handsets: search stays usable without horizontal scrolling. */
+@media (max-width:420px){
+ .discovery-site .hero-search{
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px;
+ }
+ .discovery-site .hero-search>svg{margin-left:5px;flex:0 0 auto}
+ .discovery-site .hero-search input{
+  flex:1 1 calc(100% - 52px);width:auto;min-width:0;
+ }
+ .discovery-site .hero-search button{
+  flex:1 1 100%;width:100%;min-height:44px;justify-content:center;
+ }
+ .trinity-dashboard .td-project-control{
+  display:grid;grid-template-columns:auto minmax(0,1fr);
+  align-items:center;gap:9px;width:100%;min-width:0;
+ }
+ .trinity-dashboard .td-project-control select{
+  min-height:44px;max-width:100%;min-width:0;
+ }
+ .trinity-dashboard .td-crumb{flex-wrap:wrap;min-width:0}
+ .trinity-dashboard .td-crumb strong{max-width:min(24ch,70vw)}
+ .trinity-dashboard :is(.demo-metrics,.demo-two-column,.demo-cost-grid,.demo-project-grid,.demo-record-grid){
+  grid-template-columns:minmax(0,1fr);
+ }
+ .trinity-dashboard :is(.demo-metric,.demo-card){width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+ .trinity-header :is(.trinity-popover,.trinity-mobile-panel),
+ .trinity-dashboard :is(.td-sidebar,.td-scrim,.demo-card,.demo-metric){
+  animation:none!important;transition:none!important;
+ }
+}
