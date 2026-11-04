@@ -23,7 +23,7 @@ test("Trinity premium fit keeps existing page chrome and controls within every v
      .filter(el=>el.getClientRects().length>0 && getComputedStyle(el).position!=="fixed")
      .slice(0,30).map(el=>{
       const rect=el.getBoundingClientRect();
-      return {selector,left:rect.left,right:rect.right,width:rect.width};
+      return {selector:el.tagName.toLowerCase()+"."+String(el.className),left:rect.left,right:rect.right,width:rect.width};
      });
     return {viewport,root,targets};
    });
