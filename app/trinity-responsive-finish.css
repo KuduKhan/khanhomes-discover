@@ -1,0 +1,294 @@
+/* TRINITY RESPONSIVE FINISH v2.2 — one visual contract, all three origins.
+   Refinement only: no workflow, navigation entry, permission or schema changes.
+   Canonical source is synchronized verbatim across KhanHomes / Discover / Build. */
+
+/* Header: preserve logo, slogan, controls and legible focus at every breakpoint. */
+.trinity-header.site-header.khx-top{
+ max-width:100%;box-sizing:border-box;
+}
+.trinity-header .trinity-inner.header-inner,
+.trinity-header .trinity-inner.header-inner>*{min-width:0}
+.trinity-header .trinity-brand.brand.khx-brand{
+ flex-shrink:0;max-width:100%;
+}
+.trinity-header .trinity-logo-wrap.brand-mark{
+ flex-shrink:0;overflow:visible;isolation:isolate;
+}
+.trinity-header .trinity-logo-wrap img.kh-emblem{
+ display:block;max-width:100%;max-height:100%;
+ object-fit:contain;object-position:center;
+}
+.trinity-header .trinity-brand-copy{min-width:0;max-width:100%}
+.trinity-header .trinity-product-tabs{
+ flex-shrink:1;max-width:100%;
+}
+.trinity-header .trinity-primary.desktop-nav.site-links{min-width:0}
+.trinity-header .trinity-actions.header-actions{flex:0 0 auto}
+.trinity-header .trinity-popover{
+ max-width:calc(100vw - 24px);overscroll-behavior:contain;
+}
+.trinity-header .trinity-product-button:focus-visible,
+.trinity-header .trinity-mobile-trigger:focus-visible,
+.trinity-header .trinity-icon-button:focus-visible{
+ outline:3px solid var(--trinity-accent);outline-offset:2px;
+}
+@media(max-width:520px){
+ .trinity-header .trinity-inner.header-inner{
+  width:calc(100% - 24px);grid-template-columns:minmax(0,1fr) auto;
+  column-gap:8px;row-gap:6px;padding-block:9px;
+ }
+ .trinity-header .trinity-brand.brand.khx-brand{max-width:100%;min-width:0}
+ .trinity-header .trinity-brand-copy{min-width:0;max-width:100%}
+ .trinity-header .trinity-brand-tagline{
+  display:block!important;max-width:100%;
+  white-space:normal;overflow-wrap:break-word;
+  line-height:1.3;
+ }
+ .trinity-header .trinity-product-nav{width:100%;max-width:100%}
+ .trinity-header .trinity-product-button{min-height:43px;max-width:100%}
+ .trinity-header .trinity-appearance-popover{
+  right:-46px;width:min(290px,calc(100vw - 24px));
+ }
+ .trinity-header .trinity-product-popover{
+  left:0;width:min(274px,calc(100vw - 24px));
+ }
+}
+@media(max-width:360px){
+ .trinity-header .trinity-brand.brand.khx-brand{gap:6px}
+ .trinity-header .trinity-inner.header-inner{column-gap:5px}
+}
+
+/* KhanHomes management: preserve native dashboard component widths, not
+   global clipping masks. Tables scroll inside their panel; pages do not. */
+.app-shell{width:100%;min-width:0;max-width:100%}
+.app-shell .app-main{min-width:0;max-width:100%}
+.app-shell .app-topbar{
+ box-sizing:border-box;min-width:0;max-width:100%;
+ min-height:72px;height:auto;
+ padding-block:11px;gap:9px 16px;
+}
+.app-shell .app-topbar .topbar-left,
+.app-shell .app-topbar .topbar-actions{min-width:0;max-width:100%}
+.app-shell .app-topbar .crumb{min-width:0;max-width:100%;flex:0 1 auto}
+.app-shell .app-topbar .crumb strong{
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;
+}
+.app-shell .app-content,.app-shell .app-content>*{
+ min-width:0;max-width:100%;
+}
+.app-shell .stat-grid{
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));
+ gap:clamp(10px,1.25vw,16px);
+}
+.app-shell .analytics-grid,
+.app-shell .analytics-grid.bottom-grid{
+ grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.app-shell :is(.stat-card,.panel,.table-panel,.chart-panel,.occupancy-panel,
+ .property-card,.unit-card,.modal-panel,.settings-row,.table-intro){min-width:0;max-width:100%}
+.app-shell :is(.stat-value,.stat-card strong,.panel-header h3){overflow-wrap:anywhere}
+.app-shell .table-scroll{
+ max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;
+ -webkit-overflow-scrolling:touch;
+}
+.app-shell .modal-panel{
+ max-width:calc(100vw - 24px);max-height:calc(100dvh - 28px);
+ overscroll-behavior:contain;
+}
+.app-shell .form-grid>*{min-width:0;max-width:100%}
+.kh-live-shell :is(.kh-live-main,.kh-live-content,.kh-live-topbar,
+ .kh-work-flow,.kh-live-heading,.kh-live-hero,.kh-live-meta){min-width:0;max-width:100%}
+.kh-live-shell .kh-live-topbar{
+ box-sizing:border-box;height:auto;min-height:70px;
+ gap:8px 12px;padding-block:10px;
+}
+.kh-live-shell .kh-live-topbar :is(.kh-live-left,.kh-live-topbar-actions){
+ min-width:0;max-width:100%;
+}
+.kh-live-shell :is(.kh-live-hero,.kh-live-hero>*,
+ .kh-work-flow>*,.kh-live-content>*){min-width:0}
+.kh-live-shell .kh-live-crumb strong{
+ max-width:clamp(110px,27vw,350px);text-overflow:ellipsis;
+}
+@media(max-width:1200px){
+ .app-shell .analytics-grid,
+ .app-shell .analytics-grid.bottom-grid{
+  grid-template-columns:minmax(0,1fr);
+ }
+}
+@media(max-width:980px){
+ .app-shell .app-main{margin-left:0;width:100%}
+ .app-shell .sidebar{
+  visibility:hidden;pointer-events:none;
+  max-height:100dvh;overflow-y:auto;
+ }
+ .app-shell .sidebar.sidebar-open{visibility:visible;pointer-events:auto}
+ .app-shell .app-topbar{padding-inline:clamp(12px,3vw,24px)}
+ .app-shell .app-content{padding-inline:clamp(12px,3vw,24px)}
+}
+@media(max-width:680px){
+ .app-shell .app-topbar{align-items:stretch;flex-wrap:wrap}
+ .app-shell .app-topbar .topbar-left{
+  display:flex;flex:1 1 100%;gap:8px;min-width:0;
+ }
+ .app-shell .app-topbar .topbar-actions{
+  display:flex;flex:1 1 100%;width:100%;
+  flex-wrap:wrap;justify-content:flex-start;gap:8px;
+ }
+ .app-shell .top-search{
+  width:100%;max-width:100%;flex:1 1 190px;min-width:0;
+ }
+ .app-shell .page-heading{min-width:0;flex-wrap:wrap}
+ .app-shell .form-grid{grid-template-columns:minmax(0,1fr)}
+ .kh-live-shell .kh-live-topbar{
+  flex-wrap:wrap;justify-content:space-between;padding-inline:12px;
+ }
+ .kh-live-shell .kh-live-topbar-actions{
+  flex-wrap:wrap;justify-content:flex-start;gap:8px;
+ }
+ .kh-live-shell .kh-live-crumb strong{max-width:42vw}
+}
+@media(max-width:410px){
+ .app-shell .stat-grid{grid-template-columns:minmax(0,1fr)}
+ .app-shell .panel-header,.app-shell .table-intro{flex-wrap:wrap;gap:9px}
+ .app-shell .modal-head,.app-shell .modal-form{padding:15px}
+ .app-shell .topbar-left .crumb strong{max-width:52vw}
+ .kh-live-shell .kh-live-heading h1{overflow-wrap:anywhere}
+}
+
+/* Discover: avoid hard-coded grid minimums and keep comparison tables
+   purposefully scrollable rather than making the whole page wider. */
+.discovery-site{min-width:0;max-width:100%}
+.discovery-site .wrap{max-width:100%;min-width:0}
+.discovery-site :is(.hero-layout,.hero-content,.hero-feature,.property-grid,
+ .property-card,.property-copy,.discover-toolkit,.intent-bar,.intent-form,
+ .match-layout,.visit-layout,.planner-layout,.atelier-layout,
+ .finance-layout,.account-layout){min-width:0;max-width:100%}
+.discovery-site :is(.hero-content h1,.property-copy h3,.section-heading h2,
+ .match-intro h1,.visit-intro h1,.finance-intro h1){
+ overflow-wrap:break-word;text-wrap:balance;
+}
+.discovery-site .property-grid{
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,265px),1fr));
+ gap:clamp(12px,1.7vw,22px);
+}
+.discovery-site .property-card{height:100%;min-width:0}
+.discovery-site .property-copy{min-width:0}
+.discovery-site .hero-search{min-width:0;max-width:100%}
+.discovery-site .hero-search input{min-width:0;max-width:100%}
+.discovery-site .compare-table-scroll{
+ width:100%;max-width:100%;overflow-x:auto;
+ overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;
+}
+.discovery-site :is(.match-controls,.visit-editor,.planner-sidebar,.atelier-sidebar,
+ .finance-controls,.account-panel,.listing-panel) :is(input,select,textarea){
+ min-width:0;max-width:100%;
+}
+@media(max-width:780px){
+ .discovery-site .hero-layout{grid-template-columns:minmax(0,1fr)}
+ .discovery-site .property-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .discovery-site .intent-bar{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:580px){
+ .discovery-site .wrap{width:calc(100% - 28px)}
+ .discovery-site .property-grid{grid-template-columns:minmax(0,1fr)}
+ .discovery-site .hero-search{gap:8px;padding:6px}
+ .discovery-site .hero-content h1{
+  font-size:clamp(36px,10vw,50px);line-height:1.07;
+ }
+ .discovery-site .intent-form{flex-wrap:nowrap}
+ .discovery-site .intent-form input{flex:1 1 0;min-width:0}
+ .discovery-site :is(.filter-fields.is-open,.finance-fields,.visit-fields,.atelier-form-grid){
+  grid-template-columns:minmax(0,1fr);
+ }
+}
+@media(max-width:380px){
+ .discovery-site .wrap{width:calc(100% - 24px)}
+ .discovery-site .property-card{border-radius:17px}
+ .discovery-site :is(.property-copy,.detail-aside){padding:15px}
+}
+
+/* Build: genuine construction app shell. Every card/grid is flexible,
+   every control reachable, no second toolbar or duplicate sidebar. */
+.trinity-dashboard{
+ width:100%;max-width:100%;min-width:0;
+ grid-template-columns:268px minmax(0,1fr);
+}
+.trinity-dashboard .td-body,
+.trinity-dashboard .td-content,
+.trinity-dashboard .demo-dashboard-inner,
+.trinity-dashboard .demo-workarea{min-width:0;max-width:100%}
+.trinity-dashboard .td-topbar{
+ height:auto;min-height:70px;box-sizing:border-box;
+ padding-block:12px;gap:9px 14px;
+}
+.trinity-dashboard .td-topbar>.td-topbar-inner{
+ min-width:0;max-width:100%;gap:10px 16px;
+}
+.trinity-dashboard .td-crumb{min-width:0;gap:7px;flex:1 1 155px}
+.trinity-dashboard .td-crumb strong{min-width:0;max-width:min(38ch,42vw)}
+.trinity-dashboard .td-top-actions{min-width:0;max-width:100%;gap:7px;flex-wrap:wrap}
+.trinity-dashboard .td-project-control{min-width:0;max-width:100%}
+.trinity-dashboard .td-project-control select{max-width:min(310px,29vw)}
+.trinity-dashboard .demo-metrics{
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr));
+}
+.trinity-dashboard .demo-two-column,
+.trinity-dashboard .demo-cost-grid{
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));
+}
+.trinity-dashboard :is(.demo-card,.demo-metric,.demo-form,.demo-list-row,
+ .demo-project-card,.kh-build-metric,.kh-build-panel){min-width:0;max-width:100%}
+.trinity-dashboard :is(.demo-card,.kh-build-panel) :is(input,select,textarea){
+ min-width:0;max-width:100%;
+}
+.trinity-dashboard .demo-card :is(h3,p,strong,small){overflow-wrap:anywhere}
+.trinity-dashboard .demo-list-row{flex-wrap:wrap;align-items:flex-start}
+.trinity-dashboard .td-sidebar{overscroll-behavior:contain}
+.trinity-dashboard .td-sidebar .td-brand{min-width:0;max-width:100%}
+.trinity-dashboard .td-sidebar nav a{min-height:44px;white-space:normal}
+.trinity-dashboard .kh-build-hero{max-width:100%;min-width:0}
+@media(max-width:959px){
+ .trinity-dashboard{grid-template-columns:minmax(0,1fr)}
+ .trinity-dashboard .td-topbar{
+  min-width:0;width:100%;padding-inline:clamp(12px,2.7vw,24px);
+ }
+ .trinity-dashboard .td-content{min-width:0;width:100%;padding-inline:clamp(12px,2.7vw,24px)}
+ .trinity-dashboard .td-sidebar{
+  width:min(315px,calc(100vw - 32px));
+ }
+ .trinity-dashboard .td-topbar>.td-topbar-inner{min-width:0}
+}
+@media(max-width:740px){
+ .trinity-dashboard .td-topbar>.td-topbar-inner{
+  align-items:stretch;justify-content:flex-start;
+ }
+ .trinity-dashboard .td-top-actions{
+  flex:1 1 100%;width:100%;justify-content:flex-start;flex-wrap:wrap;
+ }
+ .trinity-dashboard .td-project-control{width:100%;flex:1 1 100%}
+ .trinity-dashboard .td-project-control select{width:100%;max-width:100%}
+ .trinity-dashboard .demo-two-column,
+ .trinity-dashboard .demo-cost-grid,
+ .trinity-dashboard .demo-project-grid,
+ .trinity-dashboard .demo-record-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:470px){
+ .trinity-dashboard .td-topbar{padding:10px 12px}
+ .trinity-dashboard .td-topbar>.td-topbar-inner{flex:1 1 0}
+ .trinity-dashboard .td-content{padding:14px 12px 28px}
+ .trinity-dashboard .demo-metrics{grid-template-columns:minmax(0,1fr)}
+ .trinity-dashboard .td-project-control select{max-width:100%;font-size:12px}
+ .trinity-dashboard .td-page-heading h1{font-size:clamp(24px,7.5vw,32px)}
+ .trinity-dashboard .td-welcome-banner{padding:20px}
+}
+@media(prefers-reduced-motion:reduce){
+ .trinity-header *, .app-shell :is(.stat-card,.panel),
+ .discovery-site .property-card,.trinity-dashboard :is(.demo-metric,.demo-card){
+  transition:none!important;animation:none!important;
+ }
+}
+@media(prefers-reduced-transparency:reduce){
+ .trinity-header.site-header.khx-top,
+ .trinity-dashboard .td-topbar{backdrop-filter:none;-webkit-backdrop-filter:none}
+}
