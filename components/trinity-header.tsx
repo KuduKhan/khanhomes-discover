@@ -19,6 +19,12 @@ const products=[
  {id:"discover",label:"Discover",detail:"Find your next home",Icon:Compass},
  {id:"build",label:"Build",detail:"Construction intelligence",Icon:HardHat}
 ] as const;
+/** Canonical Trinity slogan, selected by the product actually being viewed. */
+export const brandSlogans:Record<Product,string>={
+ home:"PROPERTY INTELLIGENCE",
+ discover:"PROPERTY DISCOVERY",
+ build:"CONSTRUCTION INTELLIGENCE"
+};
 const atmosphereChoices=[
  {id:"aurora",label:"Aurora",color:"#147b69"},
  {id:"daybreak",label:"Daybreak",color:"#386d52"},
@@ -110,7 +116,7 @@ export function TrinityHeader({product}:{product:Product}){
   <div className="trinity-inner header-inner">
    <Link href="/" className="trinity-brand brand khx-brand" aria-label={"KhanHomes "+menu.name+" home"}>
     <span className="trinity-logo-wrap brand-mark"><Image className="kh-emblem" src="/brand/khanhomes-mark.svg" alt="" width={34} height={34} priority/></span>
-    <span className="trinity-brand-copy"><span className="trinity-wordmark">Khan<span>Homes</span></span><span className="trinity-brand-tagline">PROPERTY INTELLIGENCE</span></span>
+    <span className="trinity-brand-copy"><span className="trinity-wordmark">Khan<span>Homes</span></span><span className="trinity-brand-tagline">{brandSlogans[product]}</span></span>
    </Link>
    <nav className="trinity-product-tabs" aria-label="KhanHomes products">
     {products.map(({id,label})=><a key={id} href={productOrigins[id]} aria-current={id===product?"page":undefined}>{label}</a>)}
