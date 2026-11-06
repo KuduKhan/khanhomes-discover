@@ -1,6 +1,4 @@
 import {NextResponse} from "next/server";
-import manifest from "@/package.json";
+import packageJson from "../../../package.json";
 export const dynamic="force-dynamic";
-export function GET(){
- return NextResponse.json({application:"KhanHomes Discover",status:"ok",version:manifest.version},{headers:{"Cache-Control":"no-store","X-Content-Type-Options":"nosniff"}});
-}
+export function GET(){return NextResponse.json({application:"KhanHomes Discover",status:"ok",version:packageJson.version},{headers:{"Cache-Control":"no-store"}});}
