@@ -1,0 +1,47 @@
+/* Trinity dashboard visual QA: preserve icon proportions and readable data across products.
+   Applies only to existing UI. No new feature, data, auth or routing surface. */
+.app-shell :is(.stat-card,.dashboard-card,.app-card),
+.discovery-site :is(.property-card,.catalog-frame),
+.trinity-dashboard :is(.demo-card,.demo-metric,.td-panel){
+  min-width:0;
+}
+.app-shell :is(.stat-card,.dashboard-card) svg,
+.discovery-site :is(.property-specs,.property-location,.property-bottom,.property-price-line) svg,
+.trinity-dashboard :is(.demo-metric-top,.demo-card-title,.td-topbar,.td-panel-heading) svg {
+  flex-shrink:0;
+  width:auto;
+  max-width:1.5rem;
+  height:auto;
+  stroke-width:1.8;
+}
+.app-shell :is(.stat-card,.dashboard-card) :is(strong,small,p),
+.discovery-site .property-card :is(strong,small,p),
+.trinity-dashboard :is(.demo-card,.demo-metric) :is(strong,small,p){
+  min-width:0;
+  overflow-wrap:break-word;
+}
+.discovery-site .property-card .property-specs {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.trinity-dashboard .demo-metric {
+  min-width:0;
+}
+@media(max-width:420px){
+  .discovery-site .property-card :is(.property-bottom,.property-price-line){
+    min-width:0;
+    flex-wrap:wrap;
+  }
+  .trinity-dashboard .demo-metric strong {
+    overflow-wrap:anywhere;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+ .app-shell :is(.stat-card,.dashboard-card),
+ .discovery-site .property-card,
+ .trinity-dashboard :is(.demo-card,.demo-metric) {
+  animation:none!important;
+  transition:none!important;
+ }
+}
