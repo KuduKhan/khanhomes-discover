@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap");
+
+/* Trinity editorial handwriting contract.
+   Use only for deliberate public-facing emphasis; never metrics, navigation,
+   financial records, forms, accessibility labels or private workspaces. */
+:root {
+  --trinity-handwriting: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+}
+:is(
+ .kh-premium-public .hero-copy h1 em,
+ .discovery-site .hero-content h1 em,
+ .kb-public .khx-hero h1 em
+) {
+  font-family: var(--trinity-handwriting);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.11em;
+  line-height: .98;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+:is(
+ .kh-premium-public .khx-home-heading h2 em,
+ .kh-premium-public .section-heading h2 em,
+ .discovery-site .section-heading h2 em,
+ .discovery-site .connection-copy h2 em,
+ .discovery-site .closing-panel h2 em,
+ .kb-public .khx-section-heading h2 em
+) {
+  font-family: var(--trinity-handwriting);
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.09em;
+  line-height: 1.02;
+  letter-spacing: -.025em;
+  overflow-wrap: break-word;
+}
+@media (max-width:580px) {
+  :is(
+   .kh-premium-public .hero-copy h1 em,
+   .discovery-site .hero-content h1 em,
+   .kb-public .khx-hero h1 em
+  ) { font-size: 1.045em;line-height:1.04; }
+}
+@media (prefers-contrast:more) {
+  :is(
+   .kh-premium-public .hero-copy h1 em,
+   .discovery-site .hero-content h1 em,
+   .kb-public .khx-hero h1 em
+  ) { text-decoration:none; }
+}
